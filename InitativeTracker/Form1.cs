@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.ListView;
 
-namespace InitativeTracker
+namespace InitiativeTracker
 {
     public partial class initativeForm : Form
     {
@@ -145,7 +145,7 @@ namespace InitativeTracker
 
             foreach (Character character in characterList)
             {
-                string[] items = new string[] { character.Name.ToString(), character.Initative.ToString() };
+                string[] items = new string[] { character.Name.ToString(), character.Initiative.ToString() };
                 ListViewItem item = new ListViewItem(items);
                 listView.Items.Add(item);
                 
@@ -156,7 +156,7 @@ namespace InitativeTracker
         public class Character : IComparable
         {
             int initative;
-            int initativeModifier;
+            int initiativeModifier;
             string name;
             bool playerCharacter;
 
@@ -165,7 +165,7 @@ namespace InitativeTracker
                 initative = _initative;
                 name = _name;
                 playerCharacter = false;
-                initativeModifier = 0;
+                initiativeModifier = 0;
             }
 
             public Character(int _initative, string _name, bool isPC)
@@ -173,11 +173,11 @@ namespace InitativeTracker
                 initative = _initative;
                 name = _name;
                 playerCharacter = isPC;
-                initativeModifier = 0;
+                initiativeModifier = 0;
             }
 
 
-            public int Initative
+            public int Initiative
             {
                 get
                 {
@@ -190,10 +190,10 @@ namespace InitativeTracker
                 }
             }
 
-            public int InitativeModifier
+            public int InitiativeModifier
             {
-                get { return initativeModifier; }
-                set { initativeModifier = value; }
+                get { return initiativeModifier; }
+                set { initiativeModifier = value; }
             }
 
             public string Name
@@ -302,7 +302,7 @@ namespace InitativeTracker
             {
                 if (character.IsPlayerCharacter)
                 {
-                    character.Initative = 0;
+                    character.Initiative = 0;
                 }
                 else
                 {
@@ -345,9 +345,9 @@ namespace InitativeTracker
                         }
 
                         int index = characterList.IndexOf(character);
-                        int initativeModifier = ((Character)characterList[index]).InitativeModifier;
+                        int initativeModifier = ((Character)characterList[index]).InitiativeModifier;
 
-                        ((Character)characterList[index]).Initative = parsed + initativeModifier;
+                        ((Character)characterList[index]).Initiative = parsed + initativeModifier;
 
                     }
 
@@ -356,11 +356,11 @@ namespace InitativeTracker
                         //removeList.Add(character);
 
                         
-                        int num = rnd.Next(1, 21) + character.InitativeModifier; // Rolls a d20 for npc.
+                        int num = rnd.Next(1, 21) + character.InitiativeModifier; // Rolls a d20 for npc.
 
                         int index = characterList.IndexOf(character);
 
-                        ((Character)characterList[index]).Initative = num;
+                        ((Character)characterList[index]).Initiative = num;
 
                         //addList.Add(new Character(num, character.Name));
                     }
@@ -389,9 +389,9 @@ namespace InitativeTracker
                     }
 
                     int index = characterList.IndexOf(character);
-                    int initativeModifier = ((Character)characterList[index]).InitativeModifier;
+                    int initiativeModifier = ((Character)characterList[index]).InitiativeModifier;
 
-                    ((Character)characterList[index]).Initative = parsed + initativeModifier;
+                    ((Character)characterList[index]).Initiative = parsed + initiativeModifier;
 
                 }
             }

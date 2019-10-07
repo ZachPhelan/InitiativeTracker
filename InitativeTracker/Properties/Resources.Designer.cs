@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InitativeTracker.Properties
+namespace InitiativeTracker.Properties
 {
 
 
