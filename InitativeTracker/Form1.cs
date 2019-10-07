@@ -29,7 +29,7 @@ namespace InitativeTracker
             
 
             characterList.Add(new Character(10, "Galadan", true));
-            characterList.Add(new Character(5, "Dylan"));
+            characterList.Add(new Character(5, "NPC"));
 
             characterList.Add(new Character(15, "Rosi", true));
 
@@ -42,20 +42,20 @@ namespace InitativeTracker
 
         private void EnterButton_Click(object sender, EventArgs e)
         {
-            bool didParse = Int32.TryParse(initativeTextBox.Text, out int parsed);
+            //bool didParse = Int32.TryParse(initativeTextBox.Text, out int parsed);
             
-            if (!didParse)
-            {
-                MessageBox.Show("Entered initiatve must be an integer.");
-                return;
-            }
+            //if (!didParse)
+            //{
+            //    MessageBox.Show("Entered initiatve must be an integer.");
+            //    return;
+            //}
 
-            Character newChar = new Character(parsed, nameTextBox.Text.Trim(), true);
+            Character newChar = new Character(0, nameTextBox.Text.Trim(), true);
 
             characterList.Add(newChar);
 
             nameTextBox.Text = "";
-            initativeTextBox.Text = "";
+            //initativeTextBox.Text = "";
 
             nameTextBox.Focus();
 
@@ -83,12 +83,13 @@ namespace InitativeTracker
                     MessageBox.Show("Entered initiatve must be an integer.");
                     return;
                 }
+
                 DeleteCharacterWithGivenName(character.Text);
 
                 Character newChar = new Character(parsed, character.Text);
 
                 characterList.Add(newChar);
-                
+
             }
             RedrawItemBox();
         }
@@ -155,6 +156,7 @@ namespace InitativeTracker
         public class Character : IComparable
         {
             int initative;
+            int initativeModifier;
             string name;
             bool playerCharacter;
 
@@ -163,6 +165,7 @@ namespace InitativeTracker
                 initative = _initative;
                 name = _name;
                 playerCharacter = false;
+                initativeModifier = 0;
             }
 
             public Character(int _initative, string _name, bool isPC)
@@ -170,6 +173,7 @@ namespace InitativeTracker
                 initative = _initative;
                 name = _name;
                 playerCharacter = isPC;
+                initativeModifier = 0;
             }
 
 
@@ -184,6 +188,12 @@ namespace InitativeTracker
                 {
                     initative = value;
                 }
+            }
+
+            public int InitativeModifier
+            {
+                get { return initativeModifier; }
+                set { initativeModifier = value; }
             }
 
             public string Name
@@ -204,7 +214,6 @@ namespace InitativeTracker
                 get { return playerCharacter; }
                 protected set { playerCharacter = value; }
             }
-            
 
             public int CompareTo(object obj)
             {
@@ -220,15 +229,8 @@ namespace InitativeTracker
                     return -1;
             }
 
-            
-
-
         }
 
-        private void ListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         public int FindCharacterByName(string characterName)
         {
@@ -259,40 +261,33 @@ namespace InitativeTracker
             e.NewWidth = listView.Columns[e.ColumnIndex].Width;
         }
 
-        private void InitativeTextBox_TextChanged(object sender, EventArgs e)
-        {
-            bool didParse = Int32.TryParse(initativeTextBox.Text, out int parsed);
+        //private void InitativeTextBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    bool didParse = Int32.TryParse(initativeTextBox.Text, out int parsed);
 
-            if (!didParse)
-            {
-                enterButtonPC.Enabled = false;
-                enterCharacterTemp.Enabled = false;
-            }
+        //    if (!didParse)
+        //    {
+        //        enterButtonPC.Enabled = false;
+        //        enterCharacterTemp.Enabled = false;
+        //    }
 
-            else
-            {
-                enterButtonPC.Enabled = true;
-                enterCharacterTemp.Enabled = true;
-            }
+        //    else
+        //    {
+        //        enterButtonPC.Enabled = true;
+        //        enterCharacterTemp.Enabled = true;
+        //    }
                 
-        }
+        //}
 
         private void EnterCharacterTemp_Click(object sender, EventArgs e)
         {
-            bool didParse = Int32.TryParse(initativeTextBox.Text, out int parsed);
-
-            if (!didParse)
-            {
-                MessageBox.Show("Entered initiatve must be an integer.");
-                return;
-            }
-
-            Character newChar = new Character(parsed, nameTextBox.Text.Trim());
+            
+            Character newChar = new Character(0, nameTextBox.Text.Trim());
 
             characterList.Add(newChar);
 
             nameTextBox.Text = "";
-            initativeTextBox.Text = "";
+            //initativeTextBox.Text = "";
 
             nameTextBox.Focus();
 
@@ -301,7 +296,7 @@ namespace InitativeTracker
 
         private void EndCombatButton_Click(object sender, EventArgs e)
         {
-            ArrayList tempList = new ArrayList();
+            ArrayList removeList = new ArrayList();
 
             foreach (Character character in characterList)
             {
@@ -311,14 +306,105 @@ namespace InitativeTracker
                 }
                 else
                 {
-                    tempList.Add(character);
+                    removeList.Add(character);
                 }
             }
 
-            foreach (Character character in tempList)
+            foreach (Character character in removeList)
             {
                 characterList.Remove(character);
             }
+
+            RedrawItemBox();
+        }
+
+        private void InitativeButton_Click(object sender, EventArgs e)
+        {
+            //ArrayList removeList = new ArrayList();
+            //ArrayList addList = new ArrayList();
+            Random rnd = new Random();
+            if (checkBoxRollNonPc.Checked)
+            {
+                foreach (Character character in characterList)
+                {
+                    if (character.IsPlayerCharacter)
+                    {
+                        string promptValue = Prompt.ShowDialog("Changing " + character.Name + "'s initative.", "Change Initative");
+
+                        bool didParse = Int32.TryParse(promptValue, out int parsed);
+
+                        if (!didParse)
+                        {
+                            if (promptValue == "")
+                            {
+                                continue;
+                            }
+
+                            MessageBox.Show("Entered initiatve must be an integer."); // should change this to not allow non-ints, rather than returning
+                            return;
+                        }
+
+                        int index = characterList.IndexOf(character);
+                        int initativeModifier = ((Character)characterList[index]).InitativeModifier;
+
+                        ((Character)characterList[index]).Initative = parsed + initativeModifier;
+
+                    }
+
+                    else
+                    {
+                        //removeList.Add(character);
+
+                        
+                        int num = rnd.Next(1, 21) + character.InitativeModifier; // Rolls a d20 for npc.
+
+                        int index = characterList.IndexOf(character);
+
+                        ((Character)characterList[index]).Initative = num;
+
+                        //addList.Add(new Character(num, character.Name));
+                    }
+                }
+
+
+            }
+
+            else
+            {
+                foreach (Character character in characterList)
+                {
+                    string promptValue = Prompt.ShowDialog("Changing " + character.Name + "'s initative.", "Change Initative");
+
+                    bool didParse = Int32.TryParse(promptValue, out int parsed);
+
+                    if (!didParse)
+                    {
+                        if (promptValue == "")
+                        {
+                            continue;
+                        }
+
+                        MessageBox.Show("Entered initiatve must be an integer."); // should change this to not allow non-ints, rather than returning
+                        return;
+                    }
+
+                    int index = characterList.IndexOf(character);
+                    int initativeModifier = ((Character)characterList[index]).InitativeModifier;
+
+                    ((Character)characterList[index]).Initative = parsed + initativeModifier;
+
+                }
+            }
+
+            //foreach (Character character in removeList)
+            //{
+            //    characterList.Remove(character);
+            //}
+
+            //foreach (Character character in addList)
+            //{
+            //    characterList.Add(character);
+            //}
 
             RedrawItemBox();
         }
