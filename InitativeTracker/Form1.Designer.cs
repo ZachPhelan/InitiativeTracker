@@ -35,6 +35,7 @@
             this.itemViewContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeInitativeModifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView = new System.Windows.Forms.ListView();
             this.characterHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.initativeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,7 +43,10 @@
             this.EndCombatButton = new System.Windows.Forms.Button();
             this.initativeButton = new System.Windows.Forms.Button();
             this.checkBoxRollNonPc = new System.Windows.Forms.CheckBox();
+            this.initiativeModifierUpDown = new System.Windows.Forms.NumericUpDown();
+            this.checkboxModForPCs = new System.Windows.Forms.CheckBox();
             this.itemViewContext.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // enterNameText
@@ -77,23 +81,31 @@
             // 
             this.itemViewContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItem,
-            this.deleteCharacterToolStripMenuItem});
+            this.deleteCharacterToolStripMenuItem,
+            this.changeInitativeModifierToolStripMenuItem});
             this.itemViewContext.Name = "itemBoxContext";
-            this.itemViewContext.Size = new System.Drawing.Size(162, 48);
+            this.itemViewContext.Size = new System.Drawing.Size(209, 70);
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.testToolStripMenuItem.Text = "Change Initative";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.ChangeInitative_Click);
             // 
             // deleteCharacterToolStripMenuItem
             // 
             this.deleteCharacterToolStripMenuItem.Name = "deleteCharacterToolStripMenuItem";
-            this.deleteCharacterToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.deleteCharacterToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.deleteCharacterToolStripMenuItem.Text = "Delete Character";
             this.deleteCharacterToolStripMenuItem.Click += new System.EventHandler(this.DeleteCharacterToolStripMenuItem_Click);
+            // 
+            // changeInitativeModifierToolStripMenuItem
+            // 
+            this.changeInitativeModifierToolStripMenuItem.Name = "changeInitativeModifierToolStripMenuItem";
+            this.changeInitativeModifierToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.changeInitativeModifierToolStripMenuItem.Text = "Change Initative Modifier";
+            this.changeInitativeModifierToolStripMenuItem.Click += new System.EventHandler(this.ChangeInitativeModifierToolStripMenuItem_Click);
             // 
             // listView
             // 
@@ -113,6 +125,7 @@
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.ListView_ColumnWidthChanging);
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.ListView_SelectedIndexChanged);
             // 
             // characterHeader
             // 
@@ -165,11 +178,41 @@
             this.checkBoxRollNonPc.Text = "Automatically Roll for NPCs?";
             this.checkBoxRollNonPc.UseVisualStyleBackColor = true;
             // 
+            // initiativeModifierUpDown
+            // 
+            this.initiativeModifierUpDown.Location = new System.Drawing.Point(513, 389);
+            this.initiativeModifierUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.initiativeModifierUpDown.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            -2147483648});
+            this.initiativeModifierUpDown.Name = "initiativeModifierUpDown";
+            this.initiativeModifierUpDown.Size = new System.Drawing.Size(120, 20);
+            this.initiativeModifierUpDown.TabIndex = 11;
+            this.initiativeModifierUpDown.ValueChanged += new System.EventHandler(this.InitiativeModifierUpDown_ValueChanged);
+            // 
+            // checkboxModForPCs
+            // 
+            this.checkboxModForPCs.AutoSize = true;
+            this.checkboxModForPCs.Location = new System.Drawing.Point(513, 154);
+            this.checkboxModForPCs.Name = "checkboxModForPCs";
+            this.checkboxModForPCs.Size = new System.Drawing.Size(170, 17);
+            this.checkboxModForPCs.TabIndex = 12;
+            this.checkboxModForPCs.Text = "Add Initiative Modifier for PCs?";
+            this.checkboxModForPCs.UseVisualStyleBackColor = true;
+            // 
             // initativeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.checkboxModForPCs);
+            this.Controls.Add(this.initiativeModifierUpDown);
             this.Controls.Add(this.checkBoxRollNonPc);
             this.Controls.Add(this.initativeButton);
             this.Controls.Add(this.EndCombatButton);
@@ -181,6 +224,7 @@
             this.Name = "initativeForm";
             this.Text = "Initative Tracker";
             this.itemViewContext.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,6 +245,9 @@
         private System.Windows.Forms.Button EndCombatButton;
         private System.Windows.Forms.Button initativeButton;
         private System.Windows.Forms.CheckBox checkBoxRollNonPc;
+        private System.Windows.Forms.ToolStripMenuItem changeInitativeModifierToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown initiativeModifierUpDown;
+        private System.Windows.Forms.CheckBox checkboxModForPCs;
     }
 }
 

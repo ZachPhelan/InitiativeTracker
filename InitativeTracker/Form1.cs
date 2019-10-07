@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.ListView;
@@ -16,7 +17,7 @@ namespace InitiativeTracker
     public partial class initativeForm : Form
     {
 
-        ArrayList characterList;
+        List<Character> characterList;
   
         bool initativeOn = false;
 
@@ -24,7 +25,7 @@ namespace InitiativeTracker
         {
             InitializeComponent();
 
-            characterList = new ArrayList();
+            characterList = new List<Character>();
 
             
 
@@ -42,14 +43,6 @@ namespace InitiativeTracker
 
         private void EnterButton_Click(object sender, EventArgs e)
         {
-            //bool didParse = Int32.TryParse(initativeTextBox.Text, out int parsed);
-            
-            //if (!didParse)
-            //{
-            //    MessageBox.Show("Entered initiatve must be an integer.");
-            //    return;
-            //}
-
             Character newChar = new Character(0, nameTextBox.Text.Trim(), true);
 
             characterList.Add(newChar);
@@ -77,11 +70,11 @@ namespace InitiativeTracker
                 {
                     if (promptValue == "")
                     {
-                        return;
+                        continue;
                     }
 
                     MessageBox.Show("Entered initiatve must be an integer.");
-                    return;
+                    continue;
                 }
 
                 DeleteCharacterWithGivenName(character.Text);
@@ -131,11 +124,7 @@ namespace InitiativeTracker
             RedrawItemBox();
         }
 
-        /// <summary>
-        ///  
-        /// </summary>
-        /// <returns>An ArrayList if iniativeOn is set to true. Otherwise, return null. This should allow me to easily update the item box when
-        /// changing intiative.</returns>
+
         private void RedrawItemBox()
         {
             characterList.Sort();
@@ -345,9 +334,12 @@ namespace InitiativeTracker
                         }
 
                         int index = characterList.IndexOf(character);
-                        int initativeModifier = ((Character)characterList[index]).InitiativeModifier;
+                        int initiativeModifier = characterList[index].InitiativeModifier;
 
-                        ((Character)characterList[index]).Initiative = parsed + initativeModifier;
+                        if (checkboxModForPCs.Checked)
+                            parsed += initiativeModifier;
+
+                        characterList[index].Initiative = parsed;
 
                     }
 
@@ -389,24 +381,103 @@ namespace InitiativeTracker
                     }
 
                     int index = characterList.IndexOf(character);
-                    int initiativeModifier = ((Character)characterList[index]).InitiativeModifier;
+                    int initiativeModifier = characterList[index].InitiativeModifier;
 
-                    ((Character)characterList[index]).Initiative = parsed + initiativeModifier;
+                    if (character.IsPlayerCharacter)
+                    {
+                        if (checkboxModForPCs.Checked)
+                        {
+                            parsed += initiativeModifier;
+                        }
+                    }
+                    else
+                        parsed += initiativeModifier;
+
+                    ((Character)characterList[index]).Initiative = parsed;
 
                 }
             }
 
-            //foreach (Character character in removeList)
-            //{
-            //    characterList.Remove(character);
-            //}
-
-            //foreach (Character character in addList)
-            //{
-            //    characterList.Add(character);
-            //}
-
             RedrawItemBox();
+        }
+
+        private int ParseNameForModifier(string characterName)
+        {
+            if (Regex.IsMatch(characterName, "('+')[0-9]$"))
+            {
+                return Int32.Parse(characterName[characterName.Length - 1].ToString());
+            }
+
+            else if (Regex.IsMatch(characterName, "(-)[0-9]$"))
+            {
+                return Int32.Parse(characterName[characterName.Length - 1].ToString()) * -1;
+            }
+
+            else if (Regex.IsMatch(characterName, "[0-9]$"))
+            {
+                return Int32.Parse((characterName[characterName.Length - 1].ToString()));
+            }
+
+            else
+            {
+                return 0;
+            }
+        }
+
+        private void ChangeInitativeModifierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedListViewItemCollection characters = listView.SelectedItems;
+
+            foreach (ListViewItem character in characters)
+            {
+                string promptValue = Prompt.ShowDialog("Changing " + character.Text + "'s initative modifier.", "Change Initative Modifier");
+
+                int newVal = ParseNameForModifier(promptValue);
+
+                    if (promptValue == "")
+                    {
+                        continue;
+                    }
+                
+
+                int index = FindCharacterByName(character.Text);
+
+                if (index == -1)
+                    throw new IndexOutOfRangeException();
+
+                characterList[index].InitiativeModifier = newVal;
+            }
+        }
+
+        private void ListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedListViewItemCollection characters = listView.SelectedItems;
+
+            String s = "";
+
+            foreach (ListViewItem character in characters)
+            {
+                s = character.Text;
+            }
+
+            if (s == "")
+                return;
+
+            int index = FindCharacterByName(s);
+            int initiativeMod = characterList[index].InitiativeModifier;
+            initiativeModifierUpDown.Value = initiativeMod;
+        }
+
+        private void InitiativeModifierUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            SelectedListViewItemCollection characters = listView.SelectedItems;
+
+            foreach (ListViewItem character in characters)
+            {
+                int index = FindCharacterByName(character.Text);
+
+                characterList[index].InitiativeModifier = Int32.Parse(initiativeModifierUpDown.Value.ToString());
+            }
         }
     }
 }
