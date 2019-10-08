@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using static System.Windows.Forms.ListView;
 
 namespace InitiativeTracker
@@ -478,6 +479,70 @@ namespace InitiativeTracker
 
                 characterList[index].InitiativeModifier = Int32.Parse(initiativeModifierUpDown.Value.ToString());
             }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Indent = true,
+                IndentChars = "  ",
+                //NewLineOnAttributes = true
+            };
+
+            saveFileDialog.Filter = "Initiative Tracker|*.tra";
+            saveFileDialog.ShowDialog();
+
+            string filename = saveFileDialog.FileName;
+
+            //try
+            //{
+                using (XmlWriter writer = XmlWriter.Create(filename, settings))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("initiative-tracker");
+                    // Write the version attribute.
+                    //writer.WriteAttributeString("version", Version);
+
+                    // write the cells themselves
+                    foreach (Character c in characterList)
+                    {
+                        writer.WriteStartElement("character");
+                        writer.WriteAttributeString("name", c.Name);
+
+                        writer.WriteStartElement("initiative");
+                        writer.WriteElementString("initiative", c.Initiative.ToString());
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("initiative-modifier");
+                        writer.WriteElementString("initiative-modifier", c.InitiativeModifier.ToString());
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("player-characer");
+                        writer.WriteElementString("player-character", c.IsPlayerCharacter.ToString());
+                        writer.WriteEndElement();
+
+                        writer.WriteEndElement();
+
+                    }
+                        
+
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+
+                }
+
+                //Changed = false;
+
+            //}
+            //catch (ArgumentNullException)
+            //{
+            //    throw new ReadWriteException("The file name, and the version, must not be null.");
+            //}
+            //catch (Exception)
+            //{
+            //    throw new SpreadsheetReadWriteException("There was an error when saving the file.");
+            //}
         }
     }
 }

@@ -45,8 +45,14 @@
             this.checkBoxRollNonPc = new System.Windows.Forms.CheckBox();
             this.initiativeModifierUpDown = new System.Windows.Forms.NumericUpDown();
             this.checkboxModForPCs = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.itemViewContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // enterNameText
@@ -206,6 +212,38 @@
             this.checkboxModForPCs.Text = "Add Initiative Modifier for PCs?";
             this.checkboxModForPCs.UseVisualStyleBackColor = true;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.openToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
             // initativeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,6 +251,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.checkboxModForPCs);
             this.Controls.Add(this.initiativeModifierUpDown);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.checkBoxRollNonPc);
             this.Controls.Add(this.initativeButton);
             this.Controls.Add(this.EndCombatButton);
@@ -221,10 +260,13 @@
             this.Controls.Add(this.enterButtonPC);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.enterNameText);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "initativeForm";
             this.Text = "Initative Tracker";
             this.itemViewContext.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,6 +290,11 @@
         private System.Windows.Forms.ToolStripMenuItem changeInitativeModifierToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown initiativeModifierUpDown;
         private System.Windows.Forms.CheckBox checkboxModForPCs;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
