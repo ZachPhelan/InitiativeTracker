@@ -44,9 +44,7 @@ namespace InitiativeTracker
 
         private void EnterButton_Click(object sender, EventArgs e)
         {
-            Character newChar = new Character(0, nameTextBox.Text.Trim(), true);
-
-            characterList.Add(newChar);
+            AddCharacterToList(nameTextBox.Text.Trim(), true);
 
             nameTextBox.Text = "";
             //initativeTextBox.Text = "";
@@ -55,6 +53,20 @@ namespace InitiativeTracker
 
             RedrawItemBox();
 
+        }
+
+        public void AddCharacterToList(string characterName, bool isPC)
+        {
+            Character newChar = new Character(0, characterName, isPC);
+
+            characterList.Add(newChar);
+        }
+
+        public void AddCharacterToList(string characterName, int initi, int modifier, bool isPC)
+        {
+            Character newChar = new Character(initi, characterName, isPC);
+            newChar.InitiativeModifier = modifier;
+            characterList.Add(newChar);
         }
 
         private void ChangeInitative_Click(object sender, EventArgs e)
@@ -510,17 +522,23 @@ namespace InitiativeTracker
                         writer.WriteStartElement("character");
                         writer.WriteAttributeString("name", c.Name);
 
-                        writer.WriteStartElement("initiative");
-                        writer.WriteElementString("initiative", c.Initiative.ToString());
-                        writer.WriteEndElement();
+                    //writer.WriteStartElement("initiative");
+                    //writer.WriteString(c.Initiative.ToString());
+                    //writer.WriteEndElement();
 
-                        writer.WriteStartElement("initiative-modifier");
-                        writer.WriteElementString("initiative-modifier", c.InitiativeModifier.ToString());
-                        writer.WriteEndElement();
+                    writer.WriteAttributeString("initiative", c.Initiative.ToString());
 
-                        writer.WriteStartElement("player-characer");
-                        writer.WriteElementString("player-character", c.IsPlayerCharacter.ToString());
-                        writer.WriteEndElement();
+                    //writer.WriteStartElement("initiative-modifier");
+                    //writer.WriteString(c.InitiativeModifier.ToString());
+                    //writer.WriteEndElement();
+
+                    writer.WriteAttributeString("initiative-modifier", c.InitiativeModifier.ToString());
+
+                    //writer.WriteStartElement("player-characer");
+                    //writer.WriteString(c.IsPlayerCharacter.ToString());
+                    //writer.WriteEndElement();
+
+                    writer.WriteAttributeString("player-character", c.IsPlayerCharacter.ToString());
 
                         writer.WriteEndElement();
 
@@ -543,6 +561,99 @@ namespace InitiativeTracker
             //{
             //    throw new SpreadsheetReadWriteException("There was an error when saving the file.");
             //}
+        }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+
+            characterList.Clear();
+
+            if (openFileDialog.FileName != "")
+            {
+
+                XmlReader reader = XmlReader.Create(openFileDialog.FileName);
+                string characterName = "";
+                int initiative = 0;
+                int initiativeModifier = 0;
+                bool isPC = false;
+                int fieldsChanged = 0;
+
+                while (reader.Read())
+                {
+                    //characterName = "";
+                    //isPC = false;
+                    //initiative = 0;
+                    //initiativeModifier = 0;
+
+                    if (reader.IsStartElement())
+                    {
+                        //switch (reader.Name)
+                        //{
+                        //case "character":
+                        //    characterName = reader["name"];
+                        //    fieldsChanged++;
+                        //    break;
+
+                        //case "initiative":
+                        //    //reader.Read();
+                        //    //reader.Read();
+                        //    //reader.Read();
+
+                        //    initiative = Int32.Parse(reader["initiative"]);
+                        //    fieldsChanged++;
+                        //    break;
+
+                        //case "initiative-modifier":
+                        //    //reader.Read();
+                        //    //reader.Read();
+                        //    //reader.Read();
+
+                        //    initiativeModifier = Int32.Parse(reader["initiative-modifier"]);
+                        //    fieldsChanged++;
+                        //    break;
+
+                        //case "player-character":
+                        //    //reader.Read();
+
+                        //    if (reader["player-character"] == "True")
+                        //        isPC = true;
+
+                        //    else
+                        //        isPC = false;
+
+                        //    fieldsChanged++;
+                        //    break;
+
+                        //}
+
+                        if (reader.Name == "character")
+
+                        {
+                            characterName = reader["name"];
+                            initiative = Int32.Parse(reader["initiative"]);
+                            initiativeModifier = Int32.Parse(reader["initiative-modifier"]);
+                            if (reader["player-character"] == "True")
+                                isPC = true;
+
+                            else
+                                isPC = false;
+
+                            AddCharacterToList(characterName, initiative, initiativeModifier, isPC);
+                        }
+                        
+
+                        //if (fieldsChanged == 4)
+                        //{
+                        //    AddCharacterToList(characterName, initiative, initiativeModifier, isPC);
+                        //    fieldsChanged = 0;
+                        //}
+                            
+                    }
+                }
+
+                RedrawItemBox();
+            }
         }
     }
 }
