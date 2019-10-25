@@ -51,6 +51,8 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.statusEffectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemViewContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -89,9 +91,10 @@
             this.itemViewContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItem,
             this.deleteCharacterToolStripMenuItem,
-            this.changeInitativeModifierToolStripMenuItem});
+            this.changeInitativeModifierToolStripMenuItem,
+            this.statusEffectsToolStripMenuItem});
             this.itemViewContext.Name = "itemBoxContext";
-            this.itemViewContext.Size = new System.Drawing.Size(209, 70);
+            this.itemViewContext.Size = new System.Drawing.Size(209, 92);
             // 
             // testToolStripMenuItem
             // 
@@ -132,6 +135,7 @@
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.ListView_ColumnWidthChanging);
+            this.listView.ItemMouseHover += new System.Windows.Forms.ListViewItemMouseHoverEventHandler(this.ListView_ItemMouseHover);
             this.listView.SelectedIndexChanged += new System.EventHandler(this.ListView_SelectedIndexChanged);
             // 
             // characterHeader
@@ -167,6 +171,7 @@
             // 
             // initativeButton
             // 
+            this.initativeButton.AutoSize = true;
             this.initativeButton.Location = new System.Drawing.Point(513, 415);
             this.initativeButton.Name = "initativeButton";
             this.initativeButton.Size = new System.Drawing.Size(89, 23);
@@ -187,7 +192,7 @@
             // 
             // initiativeModifierUpDown
             // 
-            this.initiativeModifierUpDown.Location = new System.Drawing.Point(513, 389);
+            this.initiativeModifierUpDown.Location = new System.Drawing.Point(623, 232);
             this.initiativeModifierUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -235,14 +240,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -250,11 +255,30 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(510, 232);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 16);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Initiative Modifer:";
+            // 
+            // statusEffectsToolStripMenuItem
+            // 
+            this.statusEffectsToolStripMenuItem.Name = "statusEffectsToolStripMenuItem";
+            this.statusEffectsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.statusEffectsToolStripMenuItem.Text = "Status Effects";
+            this.statusEffectsToolStripMenuItem.Click += new System.EventHandler(this.StatusEffectsToolStripMenuItem_Click);
+            // 
             // initativeForm
             // 
+            this.AcceptButton = this.enterCharacterTemp;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.checkboxModForPCs);
             this.Controls.Add(this.initiativeModifierUpDown);
             this.Controls.Add(this.menuStrip1);
@@ -302,6 +326,8 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem statusEffectsToolStripMenuItem;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitativeTracker;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -15,27 +16,28 @@ using static System.Windows.Forms.ListView;
 
 namespace InitiativeTracker
 {
+
     public partial class initativeForm : Form
     {
 
-        List<Character> characterList;
-  
+        //List<Character> characterList;
+
         bool initativeOn = false;
 
         public initativeForm()
         {
             InitializeComponent();
 
-            characterList = new List<Character>();
+            GlobalData.characterList = new List<Character>();
 
             
 
-            characterList.Add(new Character(10, "Galadan", true));
-            characterList.Add(new Character(5, "NPC"));
+            GlobalData.characterList.Add(new Character(10, "Galadan", true));
+            GlobalData.characterList.Add(new Character(5, "NPC"));
 
-            characterList.Add(new Character(15, "Rosi", true));
+            GlobalData.characterList.Add(new Character(15, "Rosi", true));
 
-            characterList.Add(new Character(20, "Onru", true));
+            GlobalData.characterList.Add(new Character(20, "Onru", true));
 
             RedrawItemBox();
 
@@ -47,26 +49,38 @@ namespace InitiativeTracker
             AddCharacterToList(nameTextBox.Text.Trim(), true);
 
             nameTextBox.Text = "";
-            //initativeTextBox.Text = "";
 
             nameTextBox.Focus();
 
             RedrawItemBox();
-
         }
 
         public void AddCharacterToList(string characterName, bool isPC)
         {
-            Character newChar = new Character(0, characterName, isPC);
 
-            characterList.Add(newChar);
+            int modifier = ParseNameForModifier(characterName);
+
+            if (modifier != 0)
+                characterName = characterName.Substring(0, characterName.Length - 3);
+
+            Character newChar = new Character(0, modifier, characterName, isPC);
+
+
+
+            GlobalData.characterList.Add(newChar);
         }
 
         public void AddCharacterToList(string characterName, int initi, int modifier, bool isPC)
         {
-            Character newChar = new Character(initi, characterName, isPC);
-            newChar.InitiativeModifier = modifier;
-            characterList.Add(newChar);
+            if (modifier == 0)
+            {
+                modifier = ParseNameForModifier(characterName);
+                characterName = characterName.Substring(0, characterName.Length - 3);
+            }
+               
+            Character newChar = new Character(0, modifier, characterName, isPC);
+
+            GlobalData.characterList.Add(newChar);
         }
 
         private void ChangeInitative_Click(object sender, EventArgs e)
@@ -94,7 +108,9 @@ namespace InitiativeTracker
 
                 Character newChar = new Character(parsed, character.Text);
 
-                characterList.Add(newChar);
+
+
+                GlobalData.characterList.Add(newChar);
 
             }
             RedrawItemBox();
@@ -140,12 +156,10 @@ namespace InitiativeTracker
 
         private void RedrawItemBox()
         {
-            characterList.Sort();
+            GlobalData.characterList.Sort();
             listView.Items.Clear();
 
-            
-
-            foreach (Character character in characterList)
+            foreach (Character character in GlobalData.characterList)
             {
                 string[] items = new string[] { character.Name.ToString(), character.Initiative.ToString() };
                 ListViewItem item = new ListViewItem(items);
@@ -155,92 +169,16 @@ namespace InitiativeTracker
         }
 
 
-        public class Character : IComparable
-        {
-            int initative;
-            int initiativeModifier;
-            string name;
-            bool playerCharacter;
-
-            public Character(int _initative, string _name)
-            {
-                initative = _initative;
-                name = _name;
-                playerCharacter = false;
-                initiativeModifier = 0;
-            }
-
-            public Character(int _initative, string _name, bool isPC)
-            {
-                initative = _initative;
-                name = _name;
-                playerCharacter = isPC;
-                initiativeModifier = 0;
-            }
-
-
-            public int Initiative
-            {
-                get
-                {
-                    return initative;
-                }
-
-                set
-                {
-                    initative = value;
-                }
-            }
-
-            public int InitiativeModifier
-            {
-                get { return initiativeModifier; }
-                set { initiativeModifier = value; }
-            }
-
-            public string Name
-            {
-                get
-                {
-                    return name;
-                }
-
-                set
-                {
-                    name = value;
-                }
-            }
-
-            public bool IsPlayerCharacter
-            {
-                get { return playerCharacter; }
-                protected set { playerCharacter = value; }
-            }
-
-            public int CompareTo(object obj)
-            {
-                Character other = (Character)obj;
-
-                if (this.initative < other.initative)
-                    return 1;
-
-                else if (this.initative == other.initative)
-                    return 0;
-
-                else
-                    return -1;
-            }
-
-        }
+       
 
 
         public int FindCharacterByName(string characterName)
         {
-            foreach (Character character in characterList)
+            foreach (Character character in GlobalData.characterList)
             {
                 if (character.Name == characterName)
                 {
-                    return characterList.IndexOf(character);
+                    return GlobalData.characterList.IndexOf(character);
                 }
             }
 
@@ -254,7 +192,7 @@ namespace InitiativeTracker
             if (index == -1)
                 throw new IndexOutOfRangeException();
 
-            characterList.RemoveAt(index);
+            GlobalData.characterList.RemoveAt(index);
         }
 
         private void ListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
@@ -263,33 +201,11 @@ namespace InitiativeTracker
             e.NewWidth = listView.Columns[e.ColumnIndex].Width;
         }
 
-        //private void InitativeTextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    bool didParse = Int32.TryParse(initativeTextBox.Text, out int parsed);
-
-        //    if (!didParse)
-        //    {
-        //        enterButtonPC.Enabled = false;
-        //        enterCharacterTemp.Enabled = false;
-        //    }
-
-        //    else
-        //    {
-        //        enterButtonPC.Enabled = true;
-        //        enterCharacterTemp.Enabled = true;
-        //    }
-                
-        //}
-
         private void EnterCharacterTemp_Click(object sender, EventArgs e)
         {
-            
-            Character newChar = new Character(0, nameTextBox.Text.Trim());
-
-            characterList.Add(newChar);
+            AddCharacterToList(nameTextBox.Text.Trim(), false);
 
             nameTextBox.Text = "";
-            //initativeTextBox.Text = "";
 
             nameTextBox.Focus();
 
@@ -300,7 +216,7 @@ namespace InitiativeTracker
         {
             ArrayList removeList = new ArrayList();
 
-            foreach (Character character in characterList)
+            foreach (Character character in GlobalData.characterList)
             {
                 if (character.IsPlayerCharacter)
                 {
@@ -314,7 +230,7 @@ namespace InitiativeTracker
 
             foreach (Character character in removeList)
             {
-                characterList.Remove(character);
+                GlobalData.characterList.Remove(character);
             }
 
             RedrawItemBox();
@@ -322,12 +238,10 @@ namespace InitiativeTracker
 
         private void InitativeButton_Click(object sender, EventArgs e)
         {
-            //ArrayList removeList = new ArrayList();
-            //ArrayList addList = new ArrayList();
             Random rnd = new Random();
             if (checkBoxRollNonPc.Checked)
             {
-                foreach (Character character in characterList)
+                foreach (Character character in GlobalData.characterList)
                 {
                     if (character.IsPlayerCharacter)
                     {
@@ -346,28 +260,24 @@ namespace InitiativeTracker
                             return;
                         }
 
-                        int index = characterList.IndexOf(character);
-                        int initiativeModifier = characterList[index].InitiativeModifier;
+                        int index = GlobalData.characterList.IndexOf(character);
+                        int initiativeModifier = GlobalData.characterList[index].InitiativeModifier;
 
                         if (checkboxModForPCs.Checked)
                             parsed += initiativeModifier;
 
-                        characterList[index].Initiative = parsed;
+                        GlobalData.characterList[index].Initiative = parsed;
 
                     }
 
                     else
                     {
-                        //removeList.Add(character);
-
-                        
                         int num = rnd.Next(1, 21) + character.InitiativeModifier; // Rolls a d20 for npc.
 
-                        int index = characterList.IndexOf(character);
+                        int index = GlobalData.characterList.IndexOf(character);
 
-                        ((Character)characterList[index]).Initiative = num;
+                        GlobalData.characterList[index].Initiative = num;
 
-                        //addList.Add(new Character(num, character.Name));
                     }
                 }
 
@@ -376,7 +286,7 @@ namespace InitiativeTracker
 
             else
             {
-                foreach (Character character in characterList)
+                foreach (Character character in GlobalData.characterList)
                 {
                     string promptValue = Prompt.ShowDialog("Changing " + character.Name + "'s initative.", "Change Initative");
 
@@ -393,8 +303,8 @@ namespace InitiativeTracker
                         return;
                     }
 
-                    int index = characterList.IndexOf(character);
-                    int initiativeModifier = characterList[index].InitiativeModifier;
+                    int index = GlobalData.characterList.IndexOf(character);
+                    int initiativeModifier = GlobalData.characterList[index].InitiativeModifier;
 
                     if (character.IsPlayerCharacter)
                     {
@@ -406,7 +316,7 @@ namespace InitiativeTracker
                     else
                         parsed += initiativeModifier;
 
-                    ((Character)characterList[index]).Initiative = parsed;
+                    GlobalData.characterList[index].Initiative = parsed;
 
                 }
             }
@@ -416,19 +326,26 @@ namespace InitiativeTracker
 
         private int ParseNameForModifier(string characterName)
         {
-            if (Regex.IsMatch(characterName, "('+')[0-9]$"))
+            int num;
+            if (Regex.IsMatch(characterName, "('+')[0-5]$"))
             {
-                return Int32.Parse(characterName[characterName.Length - 1].ToString());
+                num = Int32.Parse(characterName[characterName.Length - 1].ToString());
+
+                return num;
             }
 
-            else if (Regex.IsMatch(characterName, "(-)[0-9]$"))
+            else if (Regex.IsMatch(characterName, "(-)[0-5]$"))
             {
-                return Int32.Parse(characterName[characterName.Length - 1].ToString()) * -1;
+                num = Int32.Parse(characterName[characterName.Length - 1].ToString()) * -1;
+
+                return num;
             }
 
-            else if (Regex.IsMatch(characterName, "[0-9]$"))
+            else if (Regex.IsMatch(characterName, "[0-5]$"))
             {
-                return Int32.Parse((characterName[characterName.Length - 1].ToString()));
+                num = Int32.Parse((characterName[characterName.Length - 1].ToString()));
+
+                return num;
             }
 
             else
@@ -458,7 +375,7 @@ namespace InitiativeTracker
                 if (index == -1)
                     throw new IndexOutOfRangeException();
 
-                characterList[index].InitiativeModifier = newVal;
+                GlobalData.characterList[index].InitiativeModifier = newVal;
             }
         }
 
@@ -477,7 +394,7 @@ namespace InitiativeTracker
                 return;
 
             int index = FindCharacterByName(s);
-            int initiativeMod = characterList[index].InitiativeModifier;
+            int initiativeMod = GlobalData.characterList[index].InitiativeModifier;
             initiativeModifierUpDown.Value = initiativeMod;
         }
 
@@ -487,11 +404,51 @@ namespace InitiativeTracker
 
             foreach (ListViewItem character in characters)
             {
+                
                 int index = FindCharacterByName(character.Text);
 
-                characterList[index].InitiativeModifier = Int32.Parse(initiativeModifierUpDown.Value.ToString());
+                GlobalData.characterList[index].InitiativeModifier = Int32.Parse(initiativeModifierUpDown.Value.ToString());
             }
         }
+
+        private void ListView_ItemMouseHover(object sender, ListViewItemMouseHoverEventArgs e)
+        {
+            ListViewItemCollection characters = listView.Items;
+
+            foreach (ListViewItem character in characters)
+            {
+                Character characterInList = GlobalData.characterList[FindCharacterByName(character.Text)];
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append("Status effects: ");
+                bool changed = false;
+
+                foreach (KeyValuePair<string, int> status in characterInList.StatusEffects)
+                {
+                    if (status.Value > 0)
+                    {
+                        sb.Append(status.Key + " ");
+                        changed = true;
+                    }
+                }
+
+                if (!changed)
+                    sb.Append("None");
+
+                character.ToolTipText = sb.ToString().Trim();
+            }
+
+           listView.ShowItemToolTips = true;
+            
+
+
+        }
+    
+
+
+
+        // Saving and loading
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -507,67 +464,35 @@ namespace InitiativeTracker
 
             string filename = saveFileDialog.FileName;
 
-            //try
-            //{
-                using (XmlWriter writer = XmlWriter.Create(filename, settings))
+
+            using (XmlWriter writer = XmlWriter.Create(filename, settings))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("initiative-tracker");
+
+                foreach (Character c in GlobalData.characterList)
                 {
-                    writer.WriteStartDocument();
-                    writer.WriteStartElement("initiative-tracker");
-                    // Write the version attribute.
-                    //writer.WriteAttributeString("version", Version);
-
-                    // write the cells themselves
-                    foreach (Character c in characterList)
-                    {
-                        writer.WriteStartElement("character");
-                        writer.WriteAttributeString("name", c.Name);
-
-                    //writer.WriteStartElement("initiative");
-                    //writer.WriteString(c.Initiative.ToString());
-                    //writer.WriteEndElement();
-
+                    writer.WriteStartElement("character");
+                    writer.WriteAttributeString("name", c.Name);
                     writer.WriteAttributeString("initiative", c.Initiative.ToString());
-
-                    //writer.WriteStartElement("initiative-modifier");
-                    //writer.WriteString(c.InitiativeModifier.ToString());
-                    //writer.WriteEndElement();
-
                     writer.WriteAttributeString("initiative-modifier", c.InitiativeModifier.ToString());
-
-                    //writer.WriteStartElement("player-characer");
-                    //writer.WriteString(c.IsPlayerCharacter.ToString());
-                    //writer.WriteEndElement();
-
                     writer.WriteAttributeString("player-character", c.IsPlayerCharacter.ToString());
-
-                        writer.WriteEndElement();
-
-                    }
-                        
-
                     writer.WriteEndElement();
-                    writer.WriteEndDocument();
-
                 }
 
-                //Changed = false;
 
-            //}
-            //catch (ArgumentNullException)
-            //{
-            //    throw new ReadWriteException("The file name, and the version, must not be null.");
-            //}
-            //catch (Exception)
-            //{
-            //    throw new SpreadsheetReadWriteException("There was an error when saving the file.");
-            //}
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+
+            }
+
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog.ShowDialog();
 
-            characterList.Clear();
+            GlobalData.characterList.Clear();
 
             if (openFileDialog.FileName != "")
             {
@@ -577,55 +502,11 @@ namespace InitiativeTracker
                 int initiative = 0;
                 int initiativeModifier = 0;
                 bool isPC = false;
-                int fieldsChanged = 0;
 
                 while (reader.Read())
                 {
-                    //characterName = "";
-                    //isPC = false;
-                    //initiative = 0;
-                    //initiativeModifier = 0;
-
                     if (reader.IsStartElement())
                     {
-                        //switch (reader.Name)
-                        //{
-                        //case "character":
-                        //    characterName = reader["name"];
-                        //    fieldsChanged++;
-                        //    break;
-
-                        //case "initiative":
-                        //    //reader.Read();
-                        //    //reader.Read();
-                        //    //reader.Read();
-
-                        //    initiative = Int32.Parse(reader["initiative"]);
-                        //    fieldsChanged++;
-                        //    break;
-
-                        //case "initiative-modifier":
-                        //    //reader.Read();
-                        //    //reader.Read();
-                        //    //reader.Read();
-
-                        //    initiativeModifier = Int32.Parse(reader["initiative-modifier"]);
-                        //    fieldsChanged++;
-                        //    break;
-
-                        //case "player-character":
-                        //    //reader.Read();
-
-                        //    if (reader["player-character"] == "True")
-                        //        isPC = true;
-
-                        //    else
-                        //        isPC = false;
-
-                        //    fieldsChanged++;
-                        //    break;
-
-                        //}
 
                         if (reader.Name == "character")
 
@@ -641,18 +522,27 @@ namespace InitiativeTracker
 
                             AddCharacterToList(characterName, initiative, initiativeModifier, isPC);
                         }
-                        
-
-                        //if (fieldsChanged == 4)
-                        //{
-                        //    AddCharacterToList(characterName, initiative, initiativeModifier, isPC);
-                        //    fieldsChanged = 0;
-                        //}
                             
                     }
                 }
 
                 RedrawItemBox();
+            }
+        }
+
+        private void StatusEffectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedListViewItemCollection characters = listView.SelectedItems;
+
+            String s = "";
+
+            foreach (ListViewItem character in characters)
+            {
+                int currentCharacter = FindCharacterByName(character.Text);
+                GlobalData.currentCharacterForStatusEffects = currentCharacter;
+
+                StatusEffectForm statusForm = new StatusEffectForm();
+                statusForm.Show();
             }
         }
     }
