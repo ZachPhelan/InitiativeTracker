@@ -11,5 +11,11 @@ namespace InitativeTracker
         public static List<Character> characterList;
 
         public static int currentCharacterForStatusEffects;
+
+        public static Character currentCombatCharacter;
+
+        public static int combatIndex;
+
+        public static bool combatOn;
     }
 }
