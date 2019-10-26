@@ -35,7 +35,7 @@
             this.itemViewContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeInitativeModifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusEffectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView = new System.Windows.Forms.ListView();
             this.characterHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.initativeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,7 +52,6 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.statusEffectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemViewContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -89,33 +88,32 @@
             // itemViewContext
             // 
             this.itemViewContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusEffectsToolStripMenuItem,
             this.testToolStripMenuItem,
-            this.deleteCharacterToolStripMenuItem,
-            this.changeInitativeModifierToolStripMenuItem,
-            this.statusEffectsToolStripMenuItem});
+            this.deleteCharacterToolStripMenuItem});
             this.itemViewContext.Name = "itemBoxContext";
-            this.itemViewContext.Size = new System.Drawing.Size(209, 92);
+            this.itemViewContext.Size = new System.Drawing.Size(181, 92);
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.testToolStripMenuItem.Text = "Change Initative";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.ChangeInitative_Click);
             // 
             // deleteCharacterToolStripMenuItem
             // 
             this.deleteCharacterToolStripMenuItem.Name = "deleteCharacterToolStripMenuItem";
-            this.deleteCharacterToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.deleteCharacterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteCharacterToolStripMenuItem.Text = "Delete Character";
             this.deleteCharacterToolStripMenuItem.Click += new System.EventHandler(this.DeleteCharacterToolStripMenuItem_Click);
             // 
-            // changeInitativeModifierToolStripMenuItem
+            // statusEffectsToolStripMenuItem
             // 
-            this.changeInitativeModifierToolStripMenuItem.Name = "changeInitativeModifierToolStripMenuItem";
-            this.changeInitativeModifierToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.changeInitativeModifierToolStripMenuItem.Text = "Change Initative Modifier";
-            this.changeInitativeModifierToolStripMenuItem.Click += new System.EventHandler(this.ChangeInitativeModifierToolStripMenuItem_Click);
+            this.statusEffectsToolStripMenuItem.Name = "statusEffectsToolStripMenuItem";
+            this.statusEffectsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.statusEffectsToolStripMenuItem.Text = "Status Effects";
+            this.statusEffectsToolStripMenuItem.Click += new System.EventHandler(this.StatusEffectsToolStripMenuItem_Click);
             // 
             // listView
             // 
@@ -265,13 +263,6 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Initiative Modifer:";
             // 
-            // statusEffectsToolStripMenuItem
-            // 
-            this.statusEffectsToolStripMenuItem.Name = "statusEffectsToolStripMenuItem";
-            this.statusEffectsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.statusEffectsToolStripMenuItem.Text = "Status Effects";
-            this.statusEffectsToolStripMenuItem.Click += new System.EventHandler(this.StatusEffectsToolStripMenuItem_Click);
-            // 
             // initativeForm
             // 
             this.AcceptButton = this.enterCharacterTemp;
@@ -317,7 +308,6 @@
         private System.Windows.Forms.Button EndCombatButton;
         private System.Windows.Forms.Button initativeButton;
         private System.Windows.Forms.CheckBox checkBoxRollNonPc;
-        private System.Windows.Forms.ToolStripMenuItem changeInitativeModifierToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown initiativeModifierUpDown;
         private System.Windows.Forms.CheckBox checkboxModForPCs;
         private System.Windows.Forms.MenuStrip menuStrip1;

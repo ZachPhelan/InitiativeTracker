@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitativeTracker", "InitativeTracker\InitativeTracker.csproj", "{BB84C18F-58E3-4A12-8453-A22F8FD2C437}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitiativeTracker", "InitativeTracker\InitiativeTracker.csproj", "{BB84C18F-58E3-4A12-8453-A22F8FD2C437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

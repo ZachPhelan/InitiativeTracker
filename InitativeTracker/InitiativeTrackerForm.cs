@@ -108,8 +108,6 @@ namespace InitiativeTracker
 
                 Character newChar = new Character(parsed, character.Text);
 
-
-
                 GlobalData.characterList.Add(newChar);
 
             }
@@ -144,13 +142,41 @@ namespace InitiativeTracker
         private void DeleteCharacterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectedListViewItemCollection characters = listView.SelectedItems;
-            
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Are you sure you want to delete the selected character(s)? \n \n");
+
             foreach (ListViewItem character in characters)
             {
-                DeleteCharacterWithGivenName(character.Text);
+                sb.Append(character.Text + "\n");
+            }
+            string message = sb.ToString();
+            string caption = "Character deletion";
+
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+
+
+            result = MessageBox.Show(this, message, caption, buttons,
+                MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.No)
+            {
+                return;
             }
 
-            RedrawItemBox();
+            else
+            {
+                
+
+                foreach (ListViewItem character in characters)
+                {
+                    DeleteCharacterWithGivenName(character.Text);
+                }
+
+                RedrawItemBox();
+            }
+
         }
 
 
@@ -167,10 +193,6 @@ namespace InitiativeTracker
                 
             }
         }
-
-
-       
-
 
         public int FindCharacterByName(string characterName)
         {
@@ -243,7 +265,7 @@ namespace InitiativeTracker
             {
                 foreach (Character character in GlobalData.characterList)
                 {
-                    if (character.IsPlayerCharacter)
+                    if (character.IsPlayerCharacter) // Manually enter PC's initative
                     {
                         string promptValue = Prompt.ShowDialog("Changing " + character.Name + "'s initative.", "Change Initative");
 
@@ -270,7 +292,7 @@ namespace InitiativeTracker
 
                     }
 
-                    else
+                    else // roll for NPCS
                     {
                         int num = rnd.Next(1, 21) + character.InitiativeModifier; // Rolls a d20 for npc.
 
@@ -280,7 +302,6 @@ namespace InitiativeTracker
 
                     }
                 }
-
 
             }
 
@@ -321,7 +342,24 @@ namespace InitiativeTracker
                 }
             }
 
+
+
             RedrawItemBox();
+        }
+
+        /// <summary>
+        /// Should track who is next in combat. Will open a dialog box showing status effects and other information on each turn. 
+        /// </summary>
+        private void CombatTracker()
+        {
+            bool combatOn = true;
+
+            while (combatOn)
+            {
+
+            }
+
+
         }
 
         private int ParseNameForModifier(string characterName)
@@ -428,8 +466,18 @@ namespace InitiativeTracker
                 {
                     if (status.Value > 0)
                     {
-                        sb.Append(status.Key + " ");
+                        if (status.Key == "Exhaustion")
+                        {
+                            sb.Append(status.Key + " = " + status.Value);
+                        }
+                        else
+                        {
+                            sb.Append(status.Key + ", ");
+                        }
+                        
                         changed = true;
+
+
                     }
                 }
 
@@ -440,8 +488,6 @@ namespace InitiativeTracker
             }
 
            listView.ShowItemToolTips = true;
-            
-
 
         }
     

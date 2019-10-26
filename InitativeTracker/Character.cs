@@ -47,7 +47,6 @@ namespace InitativeTracker
             statusEffects.Add("Blinded", 0);
             statusEffects.Add("Charmed", 0);
             statusEffects.Add("Deafened", 0);
-            statusEffects.Add("Fatigued", 0);
             statusEffects.Add("Frightened", 0);
             statusEffects.Add("Grappled", 0);
             statusEffects.Add("Incapacitated", 0);
@@ -60,6 +59,7 @@ namespace InitativeTracker
             statusEffects.Add("Stunned", 0);
             statusEffects.Add("Unconcious", 0);
             statusEffects.Add("Exhaustion", 0);
+            statusEffects.Add("Other", 0);
         }
 
         public Dictionary<string, int> StatusEffects

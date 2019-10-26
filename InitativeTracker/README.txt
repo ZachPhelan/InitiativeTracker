@@ -24,7 +24,7 @@ Currently implemented:
 
 TODO:
 	Improve window for changing initative. Right now it is too big, I want it to be more streamlined. 
-	Add support for initiative modifier, such as one based on Dex. initiative Modifier is already tracked in Character object, just need to figure out how to implement.
+	Add support for initiative modifier, such as one based on Dex. initiative Modifier is already tracked in Character object, just need to figure out how to implement. DONE
 	Maybe have a notes column that can be clicked on to expand?
 	Ways to see who's turn it is and automatically go to the next character when turn is finished.
 	Keep track of HP for individual monsters
