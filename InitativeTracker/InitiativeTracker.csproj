@@ -52,6 +52,12 @@
     <Compile Include="CombatForm.Designer.cs">
       <DependentUpon>CombatForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HPForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HPForm.Designer.cs">
+      <DependentUpon>HPForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalData.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="InitiativeTrackerForm.cs">
@@ -70,6 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CombatForm.resx">
       <DependentUpon>CombatForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HPForm.resx">
+      <DependentUpon>HPForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InitiativeTrackerForm.resx">
       <DependentUpon>InitiativeTrackerForm.cs</DependentUpon>

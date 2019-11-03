@@ -7,22 +7,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InitiativeTracker;
 
 namespace InitativeTracker
 {
     public partial class CombatForm : Form
     {
-        public CombatForm()
+
+        Action<bool> ShowAllMain;
+
+        Character currentCharacter;
+
+        //public CombatForm()
+        //{
+        //    InitializeComponent();
+
+        //    GlobalData.currentCombatCharacter = GlobalData.characterList[0];
+
+        //    //GlobalData.combatIndex = 1;
+
+        //    currentCharacterLabel.Text = GlobalData.currentCombatCharacter.Name;
+
+        //    UpdateList();
+        //}
+        public CombatForm(Action<bool> Show)
         {
             InitializeComponent();
 
-            GlobalData.currentCombatCharacter = GlobalData.characterList[0];
+            currentCharacter = GlobalData.characterList[GlobalData.combatIndex];
 
             //GlobalData.combatIndex = 1;
 
-            currentCharacterLabel.Text = GlobalData.currentCombatCharacter.Name;
+            currentCharacterLabel.Text = currentCharacter.Name;
+            UpdateList(currentCharacter);
 
-            UpdateList();
+            currentHealthLabel.Text = currentCharacter.currentHP.ToString();
+            maxHealthLabel.Text = currentCharacter.maxHP.ToString();
+
+            ShowAllMain = Show;
+
+            VerticalScroll.Enabled = false;
+            VerticalScroll.Visible = false;
+            HorizontalScroll.Enabled = false;
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -34,28 +60,31 @@ namespace InitativeTracker
                 GlobalData.combatIndex = 0;
             }
 
-            GlobalData.currentCombatCharacter = GlobalData.characterList[GlobalData.combatIndex];
+            currentCharacter = GlobalData.characterList[GlobalData.combatIndex];
 
-            currentCharacterLabel.Text = GlobalData.currentCombatCharacter.Name;
+            currentCharacterLabel.Text = currentCharacter.Name;
+            currentHealthLabel.Text = currentCharacter.currentHP.ToString();
+            maxHealthLabel.Text = currentCharacter.maxHP.ToString();
 
-            UpdateList();
+            UpdateList(currentCharacter);
         }
 
         private void EndCombatButton_Click(object sender, EventArgs e)
         {
-            GlobalData.combatOn = false;
+
+            if (ShowAllMain != null)
+                ShowAllMain.Invoke(true);
 
             this.Close();
         }
 
-        private void UpdateList()
+        private void UpdateList(Character currentCharacter)
         {
             listView1.Items.Clear();
 
             List<string> tempList = new List<string>();
-            StringBuilder sb = new StringBuilder();
 
-            foreach (KeyValuePair<string, int> status in GlobalData.currentCombatCharacter.StatusEffects)
+            foreach (KeyValuePair<string, int> status in currentCharacter.StatusEffects)
             {
                 if (status.Value > 0)
                 {

@@ -35,6 +35,10 @@
             this.endCombatButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.statuses = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.healthLabel = new System.Windows.Forms.Label();
+            this.currentHealthLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maxHealthLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -58,7 +62,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(510, 295);
+            this.button1.Location = new System.Drawing.Point(471, 295);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -69,7 +73,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 78);
+            this.label2.Location = new System.Drawing.Point(29, 161);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 3;
@@ -77,11 +81,11 @@
             // 
             // endCombatButton
             // 
-            this.endCombatButton.Location = new System.Drawing.Point(613, 295);
+            this.endCombatButton.Location = new System.Drawing.Point(579, 295);
             this.endCombatButton.Name = "endCombatButton";
-            this.endCombatButton.Size = new System.Drawing.Size(75, 23);
+            this.endCombatButton.Size = new System.Drawing.Size(104, 23);
             this.endCombatButton.TabIndex = 5;
-            this.endCombatButton.Text = "End Combat";
+            this.endCombatButton.Text = "Switch To Main";
             this.endCombatButton.UseVisualStyleBackColor = true;
             this.endCombatButton.Click += new System.EventHandler(this.EndCombatButton_Click);
             // 
@@ -90,7 +94,7 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.statuses});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(136, 78);
+            this.listView1.Location = new System.Drawing.Point(123, 161);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(179, 157);
             this.listView1.TabIndex = 6;
@@ -102,18 +106,63 @@
             this.statuses.Text = "Status Effect";
             this.statuses.Width = 174;
             // 
+            // healthLabel
+            // 
+            this.healthLabel.AutoSize = true;
+            this.healthLabel.Location = new System.Drawing.Point(64, 65);
+            this.healthLabel.Name = "healthLabel";
+            this.healthLabel.Size = new System.Drawing.Size(41, 13);
+            this.healthLabel.TabIndex = 7;
+            this.healthLabel.Text = "Health:";
+            // 
+            // currentHealthLabel
+            // 
+            this.currentHealthLabel.AutoSize = true;
+            this.currentHealthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentHealthLabel.Location = new System.Drawing.Point(175, 53);
+            this.currentHealthLabel.Name = "currentHealthLabel";
+            this.currentHealthLabel.Size = new System.Drawing.Size(26, 29);
+            this.currentHealthLabel.TabIndex = 8;
+            this.currentHealthLabel.Text = "5";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(207, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(28, 42);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "/";
+            // 
+            // maxHealthLabel
+            // 
+            this.maxHealthLabel.AutoSize = true;
+            this.maxHealthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maxHealthLabel.Location = new System.Drawing.Point(241, 66);
+            this.maxHealthLabel.Name = "maxHealthLabel";
+            this.maxHealthLabel.Size = new System.Drawing.Size(39, 29);
+            this.maxHealthLabel.TabIndex = 10;
+            this.maxHealthLabel.Text = "50";
+            // 
             // CombatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 374);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(728, 378);
+            this.ControlBox = false;
+            this.Controls.Add(this.maxHealthLabel);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.currentHealthLabel);
+            this.Controls.Add(this.healthLabel);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.endCombatButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.currentCharacterLabel);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CombatForm";
             this.Text = "Combat Info";
             this.ResumeLayout(false);
@@ -130,5 +179,9 @@
         private System.Windows.Forms.Button endCombatButton;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader statuses;
+        private System.Windows.Forms.Label healthLabel;
+        private System.Windows.Forms.Label currentHealthLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label maxHealthLabel;
     }
 }

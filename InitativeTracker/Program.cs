@@ -16,7 +16,7 @@ namespace InitiativeTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new initativeForm());
+            Application.Run(new initiativeForm());
         }
     }
 }

@@ -17,14 +17,14 @@ using static System.Windows.Forms.ListView;
 namespace InitiativeTracker
 {
 
-    public partial class initativeForm : Form
+    public partial class initiativeForm : Form
     {
 
         //List<Character> characterList;
 
         bool initativeOn = false;
 
-        public initativeForm()
+        public initiativeForm()
         {
             InitializeComponent();
 
@@ -40,6 +40,8 @@ namespace InitiativeTracker
             GlobalData.characterList.Add(new Character(20, "Onru", true));
 
             RedrawItemBox();
+
+            
 
         }
 
@@ -167,8 +169,6 @@ namespace InitiativeTracker
 
             else
             {
-                
-
                 foreach (ListViewItem character in characters)
                 {
                     DeleteCharacterWithGivenName(character.Text);
@@ -236,6 +236,8 @@ namespace InitiativeTracker
 
         private void EndCombatButton_Click(object sender, EventArgs e)
         {
+            initiativeButton.Text = "Roll Initative!";
+
             ArrayList removeList = new ArrayList();
 
             foreach (Character character in GlobalData.characterList)
@@ -255,14 +257,38 @@ namespace InitiativeTracker
                 GlobalData.characterList.Remove(character);
             }
 
+            GlobalData.combatIndex = 0;
+            GlobalData.combatOn = false;
+
             RedrawItemBox();
-            initativeButton.Enabled = true;
+            initiativeButton.Enabled = true;
         }
 
         private void InitativeButton_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            initativeButton.Enabled = false;
+            initiativeButton.Text = "Resume combat";
+
+            if (GlobalData.combatOn)
+            {
+                HideAllOnMain();
+
+                this.IsMdiContainer = true;
+
+                CombatForm form = new CombatForm(ShowAllOnMain);
+
+                //combatForm.TopLevel = false;
+
+                form.MdiParent = this;
+
+                form.Show();
+
+                return;
+            }
+
+            GlobalData.combatOn = true;
+
+
 
             if (checkBoxRollNonPc.Checked)
             {
@@ -349,56 +375,56 @@ namespace InitiativeTracker
 
             RedrawItemBox();
 
+            HideAllOnMain();
 
+            this.IsMdiContainer = true;
 
-            CombatForm combatForm = new CombatForm();
+            CombatForm combatForm = new CombatForm(ShowAllOnMain);
+
+            //combatForm.TopLevel = false;
+
+            combatForm.MdiParent = this;
 
             combatForm.Show();
-
-            
         }
+
 
         /// <summary>
         /// Should track who is next in combat. Will open a dialog box showing status effects and other information on each turn. 
         /// </summary>
-        private void CombatTracker()
-        {
-            GlobalData.combatIndex = 0;
-            GlobalData.combatOn = true;
+        //private void CombatTracker()
+        //{
+        //    GlobalData.combatIndex = 0;
+        //    GlobalData.combatOn = true;
 
-            initativeButton.Enabled = false;
+        //    initiativeButton.Enabled = false;
 
-            while (GlobalData.combatOn)
-            {
-                Character currentCharacter = GlobalData.characterList[GlobalData.combatIndex];
+        //    while (GlobalData.combatOn)
+        //    {
+        //        Character currentCharacter = GlobalData.characterList[GlobalData.combatIndex];
 
-                listView.Items[GlobalData.combatIndex].Selected = true;
+        //        listView.Items[GlobalData.combatIndex].Selected = true;
 
-                List<string> tempList = new List<string>();
-                StringBuilder sb = new StringBuilder();
+        //        List<string> tempList = new List<string>();
+        //        StringBuilder sb = new StringBuilder();
 
-                foreach (KeyValuePair<string, int> status in currentCharacter.StatusEffects)
-                {
-                    if (status.Value > 0)
-                    {
-                        tempList.Add(status.Key);
-                    }
-                }
+        //        foreach (KeyValuePair<string, int> status in currentCharacter.StatusEffects)
+        //        {
+        //            if (status.Value > 0)
+        //            {
+        //                tempList.Add(status.Key);
+        //            }
+        //        }
 
-                GlobalData.currentCombatCharacter = GlobalData.characterList[GlobalData.combatIndex];
-
-
-                CombatForm combatForm = new CombatForm();
-
-                
-
-                
-            }
-
-            initativeButton.Enabled = true;
+        //        GlobalData.currentCombatCharacter = GlobalData.characterList[GlobalData.combatIndex];
 
 
-        }
+        //        CombatForm combatForm = new CombatForm();
+
+        //    }
+
+        //    initiativeButton.Enabled = true;
+        //}
 
         public static class CombatPrompt
         {
@@ -552,7 +578,37 @@ namespace InitiativeTracker
 
         }
     
+        private void HideAllOnMain()
+        {
+            listView.Hide();
+            enterButtonPC.Hide();
+            enterCharacterTemp.Hide();
+            nameTextBox.Hide();
+            enterNameText.Hide();
+            checkBoxRollNonPc.Hide();
+            checkboxModForPCs.Hide();
+            initiativeModText.Hide();
+            initiativeModifierUpDown.Hide();
+            initiativeButton.Hide();
+            EndCombatButton.Hide();
+        }
 
+        public void ShowAllOnMain(bool doesntMatter)
+        {
+            listView.Show();
+            enterButtonPC.Show();
+            enterCharacterTemp.Show();
+            nameTextBox.Show();
+            enterNameText.Show();
+            checkBoxRollNonPc.Show();
+            checkboxModForPCs.Show();
+            initiativeModText.Show();
+            initiativeModifierUpDown.Show();
+            initiativeButton.Show();
+            EndCombatButton.Show();
+
+            this.IsMdiContainer = false;
+        }
 
 
         // Saving and loading
@@ -651,6 +707,22 @@ namespace InitiativeTracker
                 StatusEffectForm statusForm = new StatusEffectForm();
                 statusForm.Show();
             }
+        }
+
+        private void SetHPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SelectedListViewItemCollection characters = listView.SelectedItems;
+
+            foreach (ListViewItem character in characters)
+            {
+                Character characterInList = GlobalData.characterList[FindCharacterByName(character.Text)];
+
+                HPForm hpform = new HPForm(characterInList);
+
+                hpform.Show();
+            }
+            
         }
     }
 }
