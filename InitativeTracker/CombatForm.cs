@@ -45,8 +45,6 @@ namespace InitativeTracker
         {
             GlobalData.combatOn = false;
 
-
-
             this.Close();
         }
 

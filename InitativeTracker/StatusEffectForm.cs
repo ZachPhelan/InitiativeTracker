@@ -43,7 +43,55 @@ namespace InitativeTracker
                         break;
 
                     case "Charmed":
-                        //charmedCheckBox.Checked = true;
+                        charmedCheckBox.Checked = true;
+                        break;
+
+                    case "Deafened":
+                        deafenedCheckBox.Checked = true;
+                        break;
+
+                    case "Frightened":
+                        deafenedCheckBox.Checked = true;
+                        break;
+
+                    case "Grappled":
+                        grappledCheckBox.Checked = true;
+                        break;
+
+                    case "Incapacitated":
+                        incapcitatedCheckBox.Checked = true;
+                        break;
+
+                    case "Invisible":
+                        invisibleCheckBox.Checked = true;
+                        break;
+
+                    case "Paralyzed":
+                        paralyzedCheckBox.Checked = true;
+                        break;
+
+                    case "Petrified":
+                        petrifiedCheckBox.Checked = true;
+                        break;
+
+                    case "Poisoned":
+                        poisonedCheckBox.Checked = true;
+                        break;
+
+                    case "Prone":
+                        proneCheckBox.Checked = true;
+                        break;
+
+                    case "Restrained":
+                        restrainedCheckBox.Checked = true;
+                        break;
+
+                    case "Stunned":
+                        stunnedCheckBox.Checked = true;
+                        break;
+
+                    case "Unconscious":
+                        unconsciousCheckBox.Checked = true;
                         break;
                     //.....
 
@@ -290,6 +338,136 @@ namespace InitativeTracker
                 }
             }
 
+        }
+
+        private void CharmedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (charmedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Charmed", newValue);
+        }
+
+        private void DeafenedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (deafenedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Deafened", newValue);
+        }
+
+        private void FrightenedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (frightenedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Frightened", newValue);
+        }
+
+        private void GrappledCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (grappledCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Grappled", newValue);
+        }
+
+        private void IncapcitatedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (incapcitatedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Incapacitated", newValue);
+        }
+
+        private void InvisibleCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (invisibleCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Invisible", newValue);
+        }
+
+        private void ParalyzedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (paralyzedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Paralyzed", newValue);
+        }
+
+        private void PetrifiedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (petrifiedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Petrified", newValue);
+        }
+
+        private void PoisonedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (poisonedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Poisoned", newValue);
+        }
+
+        private void ProneCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (proneCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Prone", newValue);
+        }
+
+        private void RestrainedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (restrainedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Restrained", newValue);
+        }
+
+        private void StunnedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (stunnedCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Stunned", newValue);
+        }
+
+        private void UnconsciousCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            int newValue = 0;
+
+            if (unconsciousCheckBox.Checked)
+                newValue = 1;
+
+            currentCharacter.changeStatusEffect("Unconscious", newValue);
         }
     }
 }

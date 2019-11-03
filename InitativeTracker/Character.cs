@@ -60,6 +60,7 @@ namespace InitativeTracker
             statusEffects.Add("Unconcious", 0);
             statusEffects.Add("Exhaustion", 0);
             statusEffects.Add("Other", 0);
+
         }
 
         public Dictionary<string, int> StatusEffects

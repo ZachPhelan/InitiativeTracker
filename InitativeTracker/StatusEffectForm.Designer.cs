@@ -45,28 +45,28 @@
             this.proneLabel = new System.Windows.Forms.Label();
             this.petrifiedLabel = new System.Windows.Forms.Label();
             this.invisibleLabel = new System.Windows.Forms.Label();
-            this.charmedToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.incapcitatedLabel = new System.Windows.Forms.Label();
             this.restrainedLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.paralyzedLabel = new System.Windows.Forms.Label();
             this.stunnedLabel = new System.Windows.Forms.Label();
             this.unconsciousLabel = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.frightenedLabel = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.grappledLabel = new System.Windows.Forms.Label();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
+            this.charmedToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.charmedCheckBox = new System.Windows.Forms.CheckBox();
+            this.frightenedCheckBox = new System.Windows.Forms.CheckBox();
+            this.deafenedCheckBox = new System.Windows.Forms.CheckBox();
+            this.incapcitatedCheckBox = new System.Windows.Forms.CheckBox();
+            this.grappledCheckBox = new System.Windows.Forms.CheckBox();
+            this.restrainedCheckBox = new System.Windows.Forms.CheckBox();
+            this.proneCheckBox = new System.Windows.Forms.CheckBox();
+            this.poisonedCheckBox = new System.Windows.Forms.CheckBox();
+            this.petrifiedCheckBox = new System.Windows.Forms.CheckBox();
+            this.paralyzedCheckBox = new System.Windows.Forms.CheckBox();
+            this.invisibleCheckBox = new System.Windows.Forms.CheckBox();
+            this.stunnedCheckBox = new System.Windows.Forms.CheckBox();
+            this.unconsciousCheckBox = new System.Windows.Forms.CheckBox();
             this.deafenedToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.frightenedToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.grappledToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -240,10 +240,6 @@
             this.invisibleLabel.Text = "Invisible";
             this.statusToolTip.SetToolTip(this.invisibleLabel, resources.GetString("invisibleLabel.ToolTip"));
             // 
-            // charmedToolTip
-            // 
-            this.charmedToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
-            // 
             // incapcitatedLabel
             // 
             this.incapcitatedLabel.AutoSize = true;
@@ -310,39 +306,6 @@
             this.unconsciousLabel.Text = "Unconscious";
             this.statusToolTip.SetToolTip(this.unconsciousLabel, resources.GetString("unconsciousLabel.ToolTip"));
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox1.Location = new System.Drawing.Point(124, 50);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(35, 18);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = " ";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox2.Location = new System.Drawing.Point(124, 121);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(35, 18);
-            this.checkBox2.TabIndex = 14;
-            this.checkBox2.Text = " ";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox3.Location = new System.Drawing.Point(124, 83);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(35, 18);
-            this.checkBox3.TabIndex = 13;
-            this.checkBox3.Text = " ";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
             // frightenedLabel
             // 
             this.frightenedLabel.AutoSize = true;
@@ -356,28 +319,6 @@
         "he source of its fear is within line of sight.\r\nThe creature can’t willingly mov" +
         "e closer to the source of its fear.");
             // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox4.Location = new System.Drawing.Point(124, 190);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(35, 18);
-            this.checkBox4.TabIndex = 18;
-            this.checkBox4.Text = " ";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox5.Location = new System.Drawing.Point(124, 152);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(35, 18);
-            this.checkBox5.TabIndex = 17;
-            this.checkBox5.Text = " ";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
             // grappledLabel
             // 
             this.grappledLabel.AutoSize = true;
@@ -389,93 +330,165 @@
             this.grappledLabel.Text = "Grappled";
             this.statusToolTip.SetToolTip(this.grappledLabel, resources.GetString("grappledLabel.ToolTip"));
             // 
-            // checkBox6
+            // charmedToolTip
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox6.Location = new System.Drawing.Point(298, 158);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(35, 18);
-            this.checkBox6.TabIndex = 30;
-            this.checkBox6.Text = " ";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.charmedToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
             // 
-            // checkBox7
+            // charmedCheckBox
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox7.Location = new System.Drawing.Point(298, 120);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(35, 18);
-            this.checkBox7.TabIndex = 29;
-            this.checkBox7.Text = " ";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            this.charmedCheckBox.AutoSize = true;
+            this.charmedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.charmedCheckBox.Location = new System.Drawing.Point(124, 50);
+            this.charmedCheckBox.Name = "charmedCheckBox";
+            this.charmedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.charmedCheckBox.TabIndex = 10;
+            this.charmedCheckBox.Text = " ";
+            this.charmedCheckBox.UseVisualStyleBackColor = true;
+            this.charmedCheckBox.CheckedChanged += new System.EventHandler(this.CharmedCheckBox_CheckedChanged);
             // 
-            // checkBox8
+            // frightenedCheckBox
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox8.Location = new System.Drawing.Point(298, 89);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(35, 18);
-            this.checkBox8.TabIndex = 26;
-            this.checkBox8.Text = " ";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.frightenedCheckBox.AutoSize = true;
+            this.frightenedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.frightenedCheckBox.Location = new System.Drawing.Point(124, 121);
+            this.frightenedCheckBox.Name = "frightenedCheckBox";
+            this.frightenedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.frightenedCheckBox.TabIndex = 14;
+            this.frightenedCheckBox.Text = " ";
+            this.frightenedCheckBox.UseVisualStyleBackColor = true;
+            this.frightenedCheckBox.CheckedChanged += new System.EventHandler(this.FrightenedCheckBox_CheckedChanged);
             // 
-            // checkBox9
+            // deafenedCheckBox
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox9.Location = new System.Drawing.Point(298, 51);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(35, 18);
-            this.checkBox9.TabIndex = 25;
-            this.checkBox9.Text = " ";
-            this.checkBox9.UseVisualStyleBackColor = true;
+            this.deafenedCheckBox.AutoSize = true;
+            this.deafenedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.deafenedCheckBox.Location = new System.Drawing.Point(124, 83);
+            this.deafenedCheckBox.Name = "deafenedCheckBox";
+            this.deafenedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.deafenedCheckBox.TabIndex = 13;
+            this.deafenedCheckBox.Text = " ";
+            this.deafenedCheckBox.UseVisualStyleBackColor = true;
+            this.deafenedCheckBox.CheckedChanged += new System.EventHandler(this.DeafenedCheckBox_CheckedChanged);
             // 
-            // checkBox10
+            // incapcitatedCheckBox
             // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox10.Location = new System.Drawing.Point(298, 18);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(35, 18);
-            this.checkBox10.TabIndex = 22;
-            this.checkBox10.Text = " ";
-            this.checkBox10.UseVisualStyleBackColor = true;
+            this.incapcitatedCheckBox.AutoSize = true;
+            this.incapcitatedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.incapcitatedCheckBox.Location = new System.Drawing.Point(124, 190);
+            this.incapcitatedCheckBox.Name = "incapcitatedCheckBox";
+            this.incapcitatedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.incapcitatedCheckBox.TabIndex = 18;
+            this.incapcitatedCheckBox.Text = " ";
+            this.incapcitatedCheckBox.UseVisualStyleBackColor = true;
+            this.incapcitatedCheckBox.CheckedChanged += new System.EventHandler(this.IncapcitatedCheckBox_CheckedChanged);
             // 
-            // checkBox11
+            // grappledCheckBox
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox11.Location = new System.Drawing.Point(110, 220);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(35, 18);
-            this.checkBox11.TabIndex = 21;
-            this.checkBox11.Text = " ";
-            this.checkBox11.UseVisualStyleBackColor = true;
+            this.grappledCheckBox.AutoSize = true;
+            this.grappledCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.grappledCheckBox.Location = new System.Drawing.Point(124, 152);
+            this.grappledCheckBox.Name = "grappledCheckBox";
+            this.grappledCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.grappledCheckBox.TabIndex = 17;
+            this.grappledCheckBox.Text = " ";
+            this.grappledCheckBox.UseVisualStyleBackColor = true;
+            this.grappledCheckBox.CheckedChanged += new System.EventHandler(this.GrappledCheckBox_CheckedChanged);
             // 
-            // checkBox12
+            // restrainedCheckBox
             // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox12.Location = new System.Drawing.Point(302, 190);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(35, 18);
-            this.checkBox12.TabIndex = 32;
-            this.checkBox12.Text = " ";
-            this.checkBox12.UseVisualStyleBackColor = true;
+            this.restrainedCheckBox.AutoSize = true;
+            this.restrainedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.restrainedCheckBox.Location = new System.Drawing.Point(298, 158);
+            this.restrainedCheckBox.Name = "restrainedCheckBox";
+            this.restrainedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.restrainedCheckBox.TabIndex = 30;
+            this.restrainedCheckBox.Text = " ";
+            this.restrainedCheckBox.UseVisualStyleBackColor = true;
+            this.restrainedCheckBox.CheckedChanged += new System.EventHandler(this.RestrainedCheckBox_CheckedChanged);
             // 
-            // checkBox13
+            // proneCheckBox
             // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.checkBox13.Location = new System.Drawing.Point(302, 226);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(35, 18);
-            this.checkBox13.TabIndex = 34;
-            this.checkBox13.Text = " ";
-            this.checkBox13.UseVisualStyleBackColor = true;
+            this.proneCheckBox.AutoSize = true;
+            this.proneCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.proneCheckBox.Location = new System.Drawing.Point(298, 120);
+            this.proneCheckBox.Name = "proneCheckBox";
+            this.proneCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.proneCheckBox.TabIndex = 29;
+            this.proneCheckBox.Text = " ";
+            this.proneCheckBox.UseVisualStyleBackColor = true;
+            this.proneCheckBox.CheckedChanged += new System.EventHandler(this.ProneCheckBox_CheckedChanged);
+            // 
+            // poisonedCheckBox
+            // 
+            this.poisonedCheckBox.AutoSize = true;
+            this.poisonedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.poisonedCheckBox.Location = new System.Drawing.Point(298, 89);
+            this.poisonedCheckBox.Name = "poisonedCheckBox";
+            this.poisonedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.poisonedCheckBox.TabIndex = 26;
+            this.poisonedCheckBox.Text = " ";
+            this.poisonedCheckBox.UseVisualStyleBackColor = true;
+            this.poisonedCheckBox.CheckedChanged += new System.EventHandler(this.PoisonedCheckBox_CheckedChanged);
+            // 
+            // petrifiedCheckBox
+            // 
+            this.petrifiedCheckBox.AutoSize = true;
+            this.petrifiedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.petrifiedCheckBox.Location = new System.Drawing.Point(298, 51);
+            this.petrifiedCheckBox.Name = "petrifiedCheckBox";
+            this.petrifiedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.petrifiedCheckBox.TabIndex = 25;
+            this.petrifiedCheckBox.Text = " ";
+            this.petrifiedCheckBox.UseVisualStyleBackColor = true;
+            this.petrifiedCheckBox.CheckedChanged += new System.EventHandler(this.PetrifiedCheckBox_CheckedChanged);
+            // 
+            // paralyzedCheckBox
+            // 
+            this.paralyzedCheckBox.AutoSize = true;
+            this.paralyzedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.paralyzedCheckBox.Location = new System.Drawing.Point(298, 18);
+            this.paralyzedCheckBox.Name = "paralyzedCheckBox";
+            this.paralyzedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.paralyzedCheckBox.TabIndex = 22;
+            this.paralyzedCheckBox.Text = " ";
+            this.paralyzedCheckBox.UseVisualStyleBackColor = true;
+            this.paralyzedCheckBox.CheckedChanged += new System.EventHandler(this.ParalyzedCheckBox_CheckedChanged);
+            // 
+            // invisibleCheckBox
+            // 
+            this.invisibleCheckBox.AutoSize = true;
+            this.invisibleCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.invisibleCheckBox.Location = new System.Drawing.Point(110, 220);
+            this.invisibleCheckBox.Name = "invisibleCheckBox";
+            this.invisibleCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.invisibleCheckBox.TabIndex = 21;
+            this.invisibleCheckBox.Text = " ";
+            this.invisibleCheckBox.UseVisualStyleBackColor = true;
+            this.invisibleCheckBox.CheckedChanged += new System.EventHandler(this.InvisibleCheckBox_CheckedChanged);
+            // 
+            // stunnedCheckBox
+            // 
+            this.stunnedCheckBox.AutoSize = true;
+            this.stunnedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.stunnedCheckBox.Location = new System.Drawing.Point(302, 190);
+            this.stunnedCheckBox.Name = "stunnedCheckBox";
+            this.stunnedCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.stunnedCheckBox.TabIndex = 32;
+            this.stunnedCheckBox.Text = " ";
+            this.stunnedCheckBox.UseVisualStyleBackColor = true;
+            this.stunnedCheckBox.CheckedChanged += new System.EventHandler(this.StunnedCheckBox_CheckedChanged);
+            // 
+            // unconsciousCheckBox
+            // 
+            this.unconsciousCheckBox.AutoSize = true;
+            this.unconsciousCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.unconsciousCheckBox.Location = new System.Drawing.Point(302, 226);
+            this.unconsciousCheckBox.Name = "unconsciousCheckBox";
+            this.unconsciousCheckBox.Size = new System.Drawing.Size(35, 18);
+            this.unconsciousCheckBox.TabIndex = 34;
+            this.unconsciousCheckBox.Text = " ";
+            this.unconsciousCheckBox.UseVisualStyleBackColor = true;
+            this.unconsciousCheckBox.CheckedChanged += new System.EventHandler(this.UnconsciousCheckBox_CheckedChanged);
             // 
             // deafenedToolTip
             // 
@@ -535,31 +548,31 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(330, 315);
-            this.Controls.Add(this.checkBox13);
+            this.Controls.Add(this.unconsciousCheckBox);
             this.Controls.Add(this.unconsciousLabel);
-            this.Controls.Add(this.checkBox12);
+            this.Controls.Add(this.stunnedCheckBox);
             this.Controls.Add(this.stunnedLabel);
-            this.Controls.Add(this.checkBox6);
-            this.Controls.Add(this.checkBox7);
+            this.Controls.Add(this.restrainedCheckBox);
+            this.Controls.Add(this.proneCheckBox);
             this.Controls.Add(this.restrainedLabel);
             this.Controls.Add(this.proneLabel);
-            this.Controls.Add(this.checkBox8);
-            this.Controls.Add(this.checkBox9);
+            this.Controls.Add(this.poisonedCheckBox);
+            this.Controls.Add(this.petrifiedCheckBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.petrifiedLabel);
-            this.Controls.Add(this.checkBox10);
-            this.Controls.Add(this.checkBox11);
+            this.Controls.Add(this.paralyzedCheckBox);
+            this.Controls.Add(this.invisibleCheckBox);
             this.Controls.Add(this.paralyzedLabel);
             this.Controls.Add(this.invisibleLabel);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox5);
+            this.Controls.Add(this.incapcitatedCheckBox);
+            this.Controls.Add(this.grappledCheckBox);
             this.Controls.Add(this.incapcitatedLabel);
             this.Controls.Add(this.grappledLabel);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.frightenedCheckBox);
+            this.Controls.Add(this.deafenedCheckBox);
             this.Controls.Add(this.frightenedLabel);
             this.Controls.Add(this.deafenedLabel);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.charmedCheckBox);
             this.Controls.Add(this.exhaustionCheckBox6);
             this.Controls.Add(this.exhaustionCheckBox5);
             this.Controls.Add(this.exhaustionCheckBox4);
@@ -592,30 +605,30 @@
         private System.Windows.Forms.CheckBox exhaustionCheckBox6;
         private System.Windows.Forms.ToolTip statusToolTip;
         private System.Windows.Forms.ToolTip charmedToolTip;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox charmedCheckBox;
+        private System.Windows.Forms.CheckBox frightenedCheckBox;
+        private System.Windows.Forms.CheckBox deafenedCheckBox;
         private System.Windows.Forms.Label frightenedLabel;
         private System.Windows.Forms.Label deafenedLabel;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox incapcitatedCheckBox;
+        private System.Windows.Forms.CheckBox grappledCheckBox;
         private System.Windows.Forms.Label incapcitatedLabel;
         private System.Windows.Forms.Label grappledLabel;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox restrainedCheckBox;
+        private System.Windows.Forms.CheckBox proneCheckBox;
         private System.Windows.Forms.Label restrainedLabel;
         private System.Windows.Forms.Label proneLabel;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox poisonedCheckBox;
+        private System.Windows.Forms.CheckBox petrifiedCheckBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label petrifiedLabel;
-        private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.CheckBox checkBox11;
+        private System.Windows.Forms.CheckBox paralyzedCheckBox;
+        private System.Windows.Forms.CheckBox invisibleCheckBox;
         private System.Windows.Forms.Label paralyzedLabel;
         private System.Windows.Forms.Label invisibleLabel;
-        private System.Windows.Forms.CheckBox checkBox12;
+        private System.Windows.Forms.CheckBox stunnedCheckBox;
         private System.Windows.Forms.Label stunnedLabel;
-        private System.Windows.Forms.CheckBox checkBox13;
+        private System.Windows.Forms.CheckBox unconsciousCheckBox;
         private System.Windows.Forms.Label unconsciousLabel;
         private System.Windows.Forms.ToolTip deafenedToolTip;
         private System.Windows.Forms.ToolTip frightenedToolTip;

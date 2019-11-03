@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.endCombatButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.statuses = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -86,14 +87,22 @@
             // 
             // listView1
             // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.statuses});
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(136, 78);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 97);
+            this.listView1.Size = new System.Drawing.Size(179, 157);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // Form1
+            // statuses
+            // 
+            this.statuses.Text = "Status Effect";
+            this.statuses.Width = 174;
+            // 
+            // CombatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -105,7 +114,7 @@
             this.Controls.Add(this.currentCharacterLabel);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "Form1";
+            this.Name = "CombatForm";
             this.Text = "Combat Info";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -120,5 +129,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button endCombatButton;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader statuses;
     }
 }

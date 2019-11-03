@@ -531,7 +531,7 @@ namespace InitiativeTracker
                     {
                         if (status.Key == "Exhaustion")
                         {
-                            sb.Append(status.Key + " = " + status.Value);
+                            sb.Append(status.Key + " = " + status.Value + " ");
                         }
                         else
                         {
@@ -539,8 +539,6 @@ namespace InitiativeTracker
                         }
                         
                         changed = true;
-
-
                     }
                 }
 
