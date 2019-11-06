@@ -39,6 +39,9 @@
             this.currentHealthLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.maxHealthLabel = new System.Windows.Forms.Label();
+            this.changeHPUpDown = new System.Windows.Forms.NumericUpDown();
+            this.changeHPButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.changeHPUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -145,6 +148,33 @@
             this.maxHealthLabel.TabIndex = 10;
             this.maxHealthLabel.Text = "50";
             // 
+            // changeHPUpDown
+            // 
+            this.changeHPUpDown.Location = new System.Drawing.Point(498, 66);
+            this.changeHPUpDown.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.changeHPUpDown.Minimum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            -2147483648});
+            this.changeHPUpDown.Name = "changeHPUpDown";
+            this.changeHPUpDown.Size = new System.Drawing.Size(48, 20);
+            this.changeHPUpDown.TabIndex = 11;
+            // 
+            // changeHPButton
+            // 
+            this.changeHPButton.Location = new System.Drawing.Point(579, 66);
+            this.changeHPButton.Name = "changeHPButton";
+            this.changeHPButton.Size = new System.Drawing.Size(75, 23);
+            this.changeHPButton.TabIndex = 12;
+            this.changeHPButton.Text = "Change HP";
+            this.changeHPButton.UseVisualStyleBackColor = true;
+            this.changeHPButton.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // CombatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,6 +182,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(728, 378);
             this.ControlBox = false;
+            this.Controls.Add(this.changeHPButton);
+            this.Controls.Add(this.changeHPUpDown);
             this.Controls.Add(this.maxHealthLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.currentHealthLabel);
@@ -165,6 +197,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CombatForm";
             this.Text = "Combat Info";
+            ((System.ComponentModel.ISupportInitialize)(this.changeHPUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +216,7 @@
         private System.Windows.Forms.Label currentHealthLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label maxHealthLabel;
+        private System.Windows.Forms.NumericUpDown changeHPUpDown;
+        private System.Windows.Forms.Button changeHPButton;
     }
 }

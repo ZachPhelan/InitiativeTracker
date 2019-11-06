@@ -95,5 +95,23 @@ namespace InitativeTracker
             
 
         }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            int value = (int)changeHPUpDown.Value;
+
+            currentCharacter.currentHP += value;
+
+            if (currentCharacter.currentHP > currentCharacter.maxHP)
+                currentCharacter.currentHP = currentCharacter.maxHP;
+
+            if (currentCharacter.currentHP < 0)
+            {
+                currentCharacter.currentHP = 0;
+            }
+
+            currentHealthLabel.Text = currentCharacter.currentHP.ToString();
+            changeHPUpDown.Value = 0;
+        }
     }
 }

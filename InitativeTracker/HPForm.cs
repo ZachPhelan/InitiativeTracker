@@ -36,5 +36,10 @@ namespace InitativeTracker
         {
             character.maxHP = Int32.Parse(maxHPUpDown.Value.ToString());
         }
+
+        private void HPForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

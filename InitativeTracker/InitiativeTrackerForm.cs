@@ -20,10 +20,6 @@ namespace InitiativeTracker
     public partial class initiativeForm : Form
     {
 
-        //List<Character> characterList;
-
-        bool initativeOn = false;
-
         public initiativeForm()
         {
             InitializeComponent();
@@ -40,9 +36,6 @@ namespace InitiativeTracker
             GlobalData.characterList.Add(new Character(20, "Onru", true));
 
             RedrawItemBox();
-
-            
-
         }
 
 
@@ -388,44 +381,6 @@ namespace InitiativeTracker
             combatForm.Show();
         }
 
-
-        /// <summary>
-        /// Should track who is next in combat. Will open a dialog box showing status effects and other information on each turn. 
-        /// </summary>
-        //private void CombatTracker()
-        //{
-        //    GlobalData.combatIndex = 0;
-        //    GlobalData.combatOn = true;
-
-        //    initiativeButton.Enabled = false;
-
-        //    while (GlobalData.combatOn)
-        //    {
-        //        Character currentCharacter = GlobalData.characterList[GlobalData.combatIndex];
-
-        //        listView.Items[GlobalData.combatIndex].Selected = true;
-
-        //        List<string> tempList = new List<string>();
-        //        StringBuilder sb = new StringBuilder();
-
-        //        foreach (KeyValuePair<string, int> status in currentCharacter.StatusEffects)
-        //        {
-        //            if (status.Value > 0)
-        //            {
-        //                tempList.Add(status.Key);
-        //            }
-        //        }
-
-        //        GlobalData.currentCombatCharacter = GlobalData.characterList[GlobalData.combatIndex];
-
-
-        //        CombatForm combatForm = new CombatForm();
-
-        //    }
-
-        //    initiativeButton.Enabled = true;
-        //}
-
         public static class CombatPrompt
         {
             public static string ShowDialog(string text, string caption)
@@ -618,8 +573,8 @@ namespace InitiativeTracker
             XmlWriterSettings settings = new XmlWriterSettings
             {
                 Indent = true,
-                IndentChars = "  ",
-                //NewLineOnAttributes = true
+                IndentChars = "\t",
+                NewLineOnAttributes = true
             };
 
             saveFileDialog.Filter = "Initiative Tracker|*.tra";
@@ -640,10 +595,43 @@ namespace InitiativeTracker
                     writer.WriteAttributeString("initiative", c.Initiative.ToString());
                     writer.WriteAttributeString("initiative-modifier", c.InitiativeModifier.ToString());
                     writer.WriteAttributeString("player-character", c.IsPlayerCharacter.ToString());
+                    writer.WriteAttributeString("currentHP", c.currentHP.ToString());
+                    writer.WriteAttributeString("maxHP", c.maxHP.ToString());
+
+                    bool changed = false;
+                    Dictionary<string, int> tempDict = new Dictionary<string, int>();
+
+                    foreach (KeyValuePair<string, int> status in c.StatusEffects)
+                    {
+
+                        if (status.Value > 0)
+                        {
+                            tempDict.Add(status.Key, status.Value);
+                            
+                            changed = true;
+                        }
+                          
+                    }
+
+                    if (changed)
+                    {
+                        writer.WriteStartElement("statuses");
+                        StringBuilder sb = new StringBuilder();
+
+                        foreach (KeyValuePair<string, int> status in tempDict)
+                        {
+                            sb.Append(status.Key + " = " + status.Value + ", ");
+                        }
+
+                        sb.Remove(sb.Length - 2, 2);
+
+                        writer.WriteString(sb.ToString());
+
+                        writer.WriteEndElement();
+
+                    }
                     writer.WriteEndElement();
                 }
-
-
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
 
