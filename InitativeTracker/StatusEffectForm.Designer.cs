@@ -80,6 +80,7 @@
             this.stunnedToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.unconsciousToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.exhaustionToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.characterLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // blindedLabel
@@ -211,7 +212,7 @@
             // 
             this.proneLabel.AutoSize = true;
             this.proneLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.proneLabel.Location = new System.Drawing.Point(206, 117);
+            this.proneLabel.Location = new System.Drawing.Point(192, 114);
             this.proneLabel.Name = "proneLabel";
             this.proneLabel.Size = new System.Drawing.Size(61, 24);
             this.proneLabel.TabIndex = 27;
@@ -222,7 +223,7 @@
             // 
             this.petrifiedLabel.AutoSize = true;
             this.petrifiedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.petrifiedLabel.Location = new System.Drawing.Point(206, 48);
+            this.petrifiedLabel.Location = new System.Drawing.Point(192, 44);
             this.petrifiedLabel.Name = "petrifiedLabel";
             this.petrifiedLabel.Size = new System.Drawing.Size(77, 24);
             this.petrifiedLabel.TabIndex = 23;
@@ -255,7 +256,7 @@
             // 
             this.restrainedLabel.AutoSize = true;
             this.restrainedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.restrainedLabel.Location = new System.Drawing.Point(192, 152);
+            this.restrainedLabel.Location = new System.Drawing.Point(192, 154);
             this.restrainedLabel.Name = "restrainedLabel";
             this.restrainedLabel.Size = new System.Drawing.Size(100, 24);
             this.restrainedLabel.TabIndex = 28;
@@ -266,7 +267,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(192, 83);
+            this.label7.Location = new System.Drawing.Point(192, 79);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 24);
             this.label7.TabIndex = 24;
@@ -277,7 +278,7 @@
             // 
             this.paralyzedLabel.AutoSize = true;
             this.paralyzedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paralyzedLabel.Location = new System.Drawing.Point(192, 12);
+            this.paralyzedLabel.Location = new System.Drawing.Point(192, 9);
             this.paralyzedLabel.Name = "paralyzedLabel";
             this.paralyzedLabel.Size = new System.Drawing.Size(92, 24);
             this.paralyzedLabel.TabIndex = 20;
@@ -288,23 +289,25 @@
             // 
             this.stunnedLabel.AutoSize = true;
             this.stunnedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stunnedLabel.Location = new System.Drawing.Point(196, 184);
+            this.stunnedLabel.Location = new System.Drawing.Point(192, 184);
             this.stunnedLabel.Name = "stunnedLabel";
             this.stunnedLabel.Size = new System.Drawing.Size(81, 24);
             this.stunnedLabel.TabIndex = 31;
             this.stunnedLabel.Text = "Stunned";
             this.statusToolTip.SetToolTip(this.stunnedLabel, resources.GetString("stunnedLabel.ToolTip"));
+            this.stunnedLabel.Click += new System.EventHandler(this.StunnedLabel_Click);
             // 
             // unconsciousLabel
             // 
             this.unconsciousLabel.AutoSize = true;
             this.unconsciousLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unconsciousLabel.Location = new System.Drawing.Point(176, 220);
+            this.unconsciousLabel.Location = new System.Drawing.Point(168, 219);
             this.unconsciousLabel.Name = "unconsciousLabel";
             this.unconsciousLabel.Size = new System.Drawing.Size(120, 24);
             this.unconsciousLabel.TabIndex = 33;
             this.unconsciousLabel.Text = "Unconscious";
             this.statusToolTip.SetToolTip(this.unconsciousLabel, resources.GetString("unconsciousLabel.ToolTip"));
+            this.unconsciousLabel.Click += new System.EventHandler(this.UnconsciousLabel_Click);
             // 
             // frightenedLabel
             // 
@@ -350,7 +353,7 @@
             // 
             this.frightenedCheckBox.AutoSize = true;
             this.frightenedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.frightenedCheckBox.Location = new System.Drawing.Point(124, 121);
+            this.frightenedCheckBox.Location = new System.Drawing.Point(124, 119);
             this.frightenedCheckBox.Name = "frightenedCheckBox";
             this.frightenedCheckBox.Size = new System.Drawing.Size(35, 18);
             this.frightenedCheckBox.TabIndex = 14;
@@ -362,7 +365,7 @@
             // 
             this.deafenedCheckBox.AutoSize = true;
             this.deafenedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.deafenedCheckBox.Location = new System.Drawing.Point(124, 83);
+            this.deafenedCheckBox.Location = new System.Drawing.Point(124, 86);
             this.deafenedCheckBox.Name = "deafenedCheckBox";
             this.deafenedCheckBox.Size = new System.Drawing.Size(35, 18);
             this.deafenedCheckBox.TabIndex = 13;
@@ -386,7 +389,7 @@
             // 
             this.grappledCheckBox.AutoSize = true;
             this.grappledCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.grappledCheckBox.Location = new System.Drawing.Point(124, 152);
+            this.grappledCheckBox.Location = new System.Drawing.Point(124, 155);
             this.grappledCheckBox.Name = "grappledCheckBox";
             this.grappledCheckBox.Size = new System.Drawing.Size(35, 18);
             this.grappledCheckBox.TabIndex = 17;
@@ -398,7 +401,7 @@
             // 
             this.restrainedCheckBox.AutoSize = true;
             this.restrainedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.restrainedCheckBox.Location = new System.Drawing.Point(298, 158);
+            this.restrainedCheckBox.Location = new System.Drawing.Point(292, 157);
             this.restrainedCheckBox.Name = "restrainedCheckBox";
             this.restrainedCheckBox.Size = new System.Drawing.Size(35, 18);
             this.restrainedCheckBox.TabIndex = 30;
@@ -410,7 +413,7 @@
             // 
             this.proneCheckBox.AutoSize = true;
             this.proneCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.proneCheckBox.Location = new System.Drawing.Point(298, 120);
+            this.proneCheckBox.Location = new System.Drawing.Point(292, 119);
             this.proneCheckBox.Name = "proneCheckBox";
             this.proneCheckBox.Size = new System.Drawing.Size(35, 18);
             this.proneCheckBox.TabIndex = 29;
@@ -422,7 +425,7 @@
             // 
             this.poisonedCheckBox.AutoSize = true;
             this.poisonedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.poisonedCheckBox.Location = new System.Drawing.Point(298, 89);
+            this.poisonedCheckBox.Location = new System.Drawing.Point(292, 84);
             this.poisonedCheckBox.Name = "poisonedCheckBox";
             this.poisonedCheckBox.Size = new System.Drawing.Size(35, 18);
             this.poisonedCheckBox.TabIndex = 26;
@@ -434,7 +437,7 @@
             // 
             this.petrifiedCheckBox.AutoSize = true;
             this.petrifiedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.petrifiedCheckBox.Location = new System.Drawing.Point(298, 51);
+            this.petrifiedCheckBox.Location = new System.Drawing.Point(292, 49);
             this.petrifiedCheckBox.Name = "petrifiedCheckBox";
             this.petrifiedCheckBox.Size = new System.Drawing.Size(35, 18);
             this.petrifiedCheckBox.TabIndex = 25;
@@ -446,7 +449,7 @@
             // 
             this.paralyzedCheckBox.AutoSize = true;
             this.paralyzedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.paralyzedCheckBox.Location = new System.Drawing.Point(298, 18);
+            this.paralyzedCheckBox.Location = new System.Drawing.Point(292, 14);
             this.paralyzedCheckBox.Name = "paralyzedCheckBox";
             this.paralyzedCheckBox.Size = new System.Drawing.Size(35, 18);
             this.paralyzedCheckBox.TabIndex = 22;
@@ -458,7 +461,7 @@
             // 
             this.invisibleCheckBox.AutoSize = true;
             this.invisibleCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.invisibleCheckBox.Location = new System.Drawing.Point(110, 220);
+            this.invisibleCheckBox.Location = new System.Drawing.Point(124, 223);
             this.invisibleCheckBox.Name = "invisibleCheckBox";
             this.invisibleCheckBox.Size = new System.Drawing.Size(35, 18);
             this.invisibleCheckBox.TabIndex = 21;
@@ -470,7 +473,7 @@
             // 
             this.stunnedCheckBox.AutoSize = true;
             this.stunnedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.stunnedCheckBox.Location = new System.Drawing.Point(302, 190);
+            this.stunnedCheckBox.Location = new System.Drawing.Point(292, 189);
             this.stunnedCheckBox.Name = "stunnedCheckBox";
             this.stunnedCheckBox.Size = new System.Drawing.Size(35, 18);
             this.stunnedCheckBox.TabIndex = 32;
@@ -482,7 +485,7 @@
             // 
             this.unconsciousCheckBox.AutoSize = true;
             this.unconsciousCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.unconsciousCheckBox.Location = new System.Drawing.Point(302, 226);
+            this.unconsciousCheckBox.Location = new System.Drawing.Point(292, 225);
             this.unconsciousCheckBox.Name = "unconsciousCheckBox";
             this.unconsciousCheckBox.Size = new System.Drawing.Size(35, 18);
             this.unconsciousCheckBox.TabIndex = 34;
@@ -542,12 +545,24 @@
             // 
             this.exhaustionToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
             // 
+            // characterLabel
+            // 
+            this.characterLabel.AutoSize = true;
+            this.characterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.characterLabel.Location = new System.Drawing.Point(160, 286);
+            this.characterLabel.Name = "characterLabel";
+            this.characterLabel.Size = new System.Drawing.Size(113, 20);
+            this.characterLabel.TabIndex = 35;
+            this.characterLabel.Text = "character label";
+            this.characterLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // StatusEffectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(330, 315);
+            this.Controls.Add(this.characterLabel);
             this.Controls.Add(this.unconsciousCheckBox);
             this.Controls.Add(this.unconsciousLabel);
             this.Controls.Add(this.stunnedCheckBox);
@@ -643,5 +658,6 @@
         private System.Windows.Forms.ToolTip stunnedToolTip;
         private System.Windows.Forms.ToolTip unconsciousToolTip;
         private System.Windows.Forms.ToolTip exhaustionToolTip;
+        private System.Windows.Forms.Label characterLabel;
     }
 }

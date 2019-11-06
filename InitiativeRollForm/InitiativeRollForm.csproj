@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BB84C18F-58E3-4A12-8453-A22F8FD2C437}</ProjectGuid>
+    <ProjectGuid>{CFF077CB-4D8B-4153-8F01-E0DC5EA8D898}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>InitativeTracker</RootNamespace>
-    <AssemblyName>InitativeTracker</AssemblyName>
+    <RootNamespace>InitiativeRollForm</RootNamespace>
+    <AssemblyName>InitiativeRollForm</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,49 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CombatForm.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CombatForm.Designer.cs">
-      <DependentUpon>CombatForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HPForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HPForm.Designer.cs">
-      <DependentUpon>HPForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GlobalData.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="InitiativeTrackerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InitiativeTrackerForm.Designer.cs">
-      <DependentUpon>InitiativeTrackerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StatusEffectForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StatusEffectForm.Designer.cs">
-      <DependentUpon>StatusEffectForm.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="CombatForm.resx">
-      <DependentUpon>CombatForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HPForm.resx">
-      <DependentUpon>HPForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InitiativeTrackerForm.resx">
-      <DependentUpon>InitiativeTrackerForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -98,12 +63,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="StatusEffectForm.resx">
-      <DependentUpon>StatusEffectForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -116,9 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,18 +18,8 @@ namespace InitativeTracker
 
         Character currentCharacter;
 
-        //public CombatForm()
-        //{
-        //    InitializeComponent();
+        int roundNum;
 
-        //    GlobalData.currentCombatCharacter = GlobalData.characterList[0];
-
-        //    //GlobalData.combatIndex = 1;
-
-        //    currentCharacterLabel.Text = GlobalData.currentCombatCharacter.Name;
-
-        //    UpdateList();
-        //}
         public CombatForm(Action<bool> Show)
         {
             InitializeComponent();
@@ -43,24 +33,53 @@ namespace InitativeTracker
 
             currentHealthLabel.Text = currentCharacter.currentHP.ToString();
             maxHealthLabel.Text = currentCharacter.maxHP.ToString();
+            tempHealthLabelVal.Text = currentCharacter.tempHP.ToString();
 
             ShowAllMain = Show;
 
             VerticalScroll.Enabled = false;
             VerticalScroll.Visible = false;
             HorizontalScroll.Enabled = false;
+
+            roundNum = 1;
+            roundNumberLabel.Text = roundNum.ToString();
+
+            if (GlobalData.characterList.Count > 2)
+            {
+                nextCharacterLabel.Text = GlobalData.characterList[1].Name;
+            }
+
+            else
+            {
+                nextCharacterLabel.Text = "None";
+            }
+            
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void endTurnButton_Click(object sender, EventArgs e)
         {
             GlobalData.combatIndex++;
 
             if (GlobalData.combatIndex >= GlobalData.characterList.Count)
             {
                 GlobalData.combatIndex = 0;
+
+                roundNum++;
+                roundNumberLabel.Text = roundNum.ToString();
             }
 
+            if (GlobalData.combatIndex + 1 >= GlobalData.characterList.Count)
+            {
+                nextCharacterLabel.Text = GlobalData.characterList[0].Name;
+            }
+
+            else
+                nextCharacterLabel.Text = GlobalData.characterList[GlobalData.combatIndex + 1].Name;
+
+
             currentCharacter = GlobalData.characterList[GlobalData.combatIndex];
+
+
 
             currentCharacterLabel.Text = currentCharacter.Name;
             currentHealthLabel.Text = currentCharacter.currentHP.ToString();
@@ -75,7 +94,7 @@ namespace InitativeTracker
             if (ShowAllMain != null)
                 ShowAllMain.Invoke(true);
 
-            this.Close();
+            this.Hide();
         }
 
         private void UpdateList(Character currentCharacter)
@@ -96,11 +115,41 @@ namespace InitativeTracker
 
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void changeHPButton_Click(object sender, EventArgs e)
         {
             int value = (int)changeHPUpDown.Value;
+            damageOrHeal(value);
+        }
 
-            currentCharacter.currentHP += value;
+        private void hurtButton_Click(object sender, EventArgs e)
+        {
+            int value = (int)changeHPUpDown.Value * -1;
+            damageOrHeal(value);
+        }
+
+        private void damageOrHeal(int val)
+        {
+            if (val > 0)
+            {
+                currentCharacter.currentHP += val;
+            }
+
+            else
+            {
+                int change = currentCharacter.tempHP + val;
+
+                if (change < 0)
+                {
+                    currentCharacter.currentHP += change;
+                    currentCharacter.tempHP = 0;
+                }
+
+                else
+                {
+                    currentCharacter.tempHP = change;
+                }
+            }
+
 
             if (currentCharacter.currentHP > currentCharacter.maxHP)
                 currentCharacter.currentHP = currentCharacter.maxHP;
@@ -111,6 +160,8 @@ namespace InitativeTracker
             }
 
             currentHealthLabel.Text = currentCharacter.currentHP.ToString();
+            tempHealthLabelVal.Text = currentCharacter.tempHP.ToString();
+
             changeHPUpDown.Value = 0;
         }
     }

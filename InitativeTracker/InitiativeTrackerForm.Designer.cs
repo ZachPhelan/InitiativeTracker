@@ -34,6 +34,7 @@
             this.enterButtonPC = new System.Windows.Forms.Button();
             this.itemViewContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.statusEffectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setHPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView = new System.Windows.Forms.ListView();
@@ -52,7 +53,6 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.initiativeModText = new System.Windows.Forms.Label();
-            this.setHPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemViewContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -94,14 +94,21 @@
             this.testToolStripMenuItem,
             this.deleteCharacterToolStripMenuItem});
             this.itemViewContext.Name = "itemBoxContext";
-            this.itemViewContext.Size = new System.Drawing.Size(181, 114);
+            this.itemViewContext.Size = new System.Drawing.Size(162, 92);
             // 
             // statusEffectsToolStripMenuItem
             // 
             this.statusEffectsToolStripMenuItem.Name = "statusEffectsToolStripMenuItem";
-            this.statusEffectsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.statusEffectsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.statusEffectsToolStripMenuItem.Text = "Status Effects";
             this.statusEffectsToolStripMenuItem.Click += new System.EventHandler(this.StatusEffectsToolStripMenuItem_Click);
+            // 
+            // setHPToolStripMenuItem
+            // 
+            this.setHPToolStripMenuItem.Name = "setHPToolStripMenuItem";
+            this.setHPToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.setHPToolStripMenuItem.Text = "Set HP";
+            this.setHPToolStripMenuItem.Click += new System.EventHandler(this.SetHPToolStripMenuItem_Click);
             // 
             // testToolStripMenuItem
             // 
@@ -161,6 +168,7 @@
             // 
             // EndCombatButton
             // 
+            this.EndCombatButton.Enabled = false;
             this.EndCombatButton.Location = new System.Drawing.Point(691, 415);
             this.EndCombatButton.Name = "EndCombatButton";
             this.EndCombatButton.Size = new System.Drawing.Size(75, 23);
@@ -265,13 +273,6 @@
             this.initiativeModText.TabIndex = 14;
             this.initiativeModText.Text = "Initiative Modifer:";
             // 
-            // setHPToolStripMenuItem
-            // 
-            this.setHPToolStripMenuItem.Name = "setHPToolStripMenuItem";
-            this.setHPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.setHPToolStripMenuItem.Text = "Set HP";
-            this.setHPToolStripMenuItem.Click += new System.EventHandler(this.SetHPToolStripMenuItem_Click);
-            // 
             // initiativeForm
             // 
             this.AcceptButton = this.enterCharacterTemp;
@@ -292,7 +293,8 @@
             this.Controls.Add(this.enterNameText);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "initiativeForm";
-            this.Text = "Initative Tracker";
+            this.Text = "Initiative Tracker";
+            this.Load += new System.EventHandler(this.InitiativeForm_Load);
             this.itemViewContext.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.initiativeModifierUpDown)).EndInit();
             this.menuStrip1.ResumeLayout(false);
