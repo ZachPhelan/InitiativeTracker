@@ -17,5 +17,7 @@ namespace InitativeTracker
         public static int combatIndex;
 
         public static bool combatOn;
+
+        public static int roundNum;
     }
 }
