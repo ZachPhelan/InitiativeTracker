@@ -13,7 +13,7 @@ namespace InitativeTracker
         string name;
         bool playerCharacter;
         Dictionary<string, int> statusEffects;
-        public int currentHP, maxHP;
+        public int currentHP, maxHP, tempHP;
 
         public Character(int _initative, string _name)
         {
@@ -25,6 +25,7 @@ namespace InitativeTracker
 
             currentHP = 0;
             maxHP = 0;
+            tempHP = 0;
         }
 
         public Character(int _initative, string _name, bool isPC)
@@ -37,6 +38,7 @@ namespace InitativeTracker
 
             currentHP = 0;
             maxHP = 0;
+            tempHP = 0;
         }
 
         public Character(int _initative, int _modifier, string _name, bool isPC)
@@ -49,6 +51,7 @@ namespace InitativeTracker
 
             currentHP = 0;
             maxHP = 0;
+            tempHP = 0;
         }
 
         private void initializeStatusEffects()

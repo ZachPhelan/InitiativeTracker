@@ -21,6 +21,8 @@ namespace InitativeTracker
 
             this.Text = currentCharacter.Name + "'s Status Effects";
 
+            characterLabel.Text = currentCharacter.Name;
+
             List<string> checkBoxesToUpdate = new List<string>();
             int exhaustionValue = 0;
 
@@ -468,6 +470,16 @@ namespace InitativeTracker
                 newValue = 1;
 
             currentCharacter.changeStatusEffect("Unconscious", newValue);
+        }
+
+        private void StunnedLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UnconsciousLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

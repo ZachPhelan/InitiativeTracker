@@ -20,6 +20,8 @@ namespace InitiativeTracker
     public partial class initiativeForm : Form
     {
 
+        CombatForm combatForm;
+
         public initiativeForm()
         {
             InitializeComponent();
@@ -35,6 +37,8 @@ namespace InitiativeTracker
 
             GlobalData.characterList.Add(new Character(20, "Onru", true));
 
+            combatForm = new CombatForm(ShowAllOnMain);
+            
             RedrawItemBox();
         }
 
@@ -65,7 +69,7 @@ namespace InitiativeTracker
             GlobalData.characterList.Add(newChar);
         }
 
-        public void AddCharacterToList(string characterName, int initi, int modifier, bool isPC)
+        public void AddCharacterToList(string characterName, int initiative, int modifier, bool isPC)
         {
             if (modifier == 0)
             {
@@ -165,6 +169,13 @@ namespace InitiativeTracker
                 foreach (ListViewItem character in characters)
                 {
                     DeleteCharacterWithGivenName(character.Text);
+
+
+                    // changes the combat index if a character is deleted mid-battle.
+                    GlobalData.combatIndex--;
+
+                    if (GlobalData.combatIndex < 0)
+                        GlobalData.combatIndex = GlobalData.characterList.Count - 1;
                 }
 
                 RedrawItemBox();
@@ -229,38 +240,54 @@ namespace InitiativeTracker
 
         private void EndCombatButton_Click(object sender, EventArgs e)
         {
-            initiativeButton.Text = "Roll Initative!";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
 
-            ArrayList removeList = new ArrayList();
+            result = MessageBox.Show(this, "Are you sure you want to end combat?", "Ending Combat", buttons,
+                MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
-            foreach (Character character in GlobalData.characterList)
+            if (result == DialogResult.No)
             {
-                if (character.IsPlayerCharacter)
-                {
-                    character.Initiative = 0;
-                }
-                else
-                {
-                    removeList.Add(character);
-                }
+                return;
             }
 
-            foreach (Character character in removeList)
+            else
             {
-                GlobalData.characterList.Remove(character);
+                initiativeButton.Text = "Roll Initative!";
+
+                ArrayList removeList = new ArrayList();
+
+                foreach (Character character in GlobalData.characterList)
+                {
+                    if (character.IsPlayerCharacter)
+                    {
+                        character.Initiative = 0;
+                    }
+                    else
+                    {
+                        removeList.Add(character);
+                    }
+                }
+
+                foreach (Character character in removeList)
+                {
+                    GlobalData.characterList.Remove(character);
+                }
+
+                GlobalData.combatIndex = 0;
+                GlobalData.combatOn = false;
+
+                RedrawItemBox();
+                initiativeButton.Enabled = true;
             }
 
-            GlobalData.combatIndex = 0;
-            GlobalData.combatOn = false;
-
-            RedrawItemBox();
-            initiativeButton.Enabled = true;
+           
         }
 
         private void InitativeButton_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            initiativeButton.Text = "Resume combat";
+            
 
             if (GlobalData.combatOn)
             {
@@ -268,20 +295,14 @@ namespace InitiativeTracker
 
                 this.IsMdiContainer = true;
 
-                CombatForm form = new CombatForm(ShowAllOnMain);
-
                 //combatForm.TopLevel = false;
 
-                form.MdiParent = this;
+                combatForm.MdiParent = this;
 
-                form.Show();
+                combatForm.Show();
 
                 return;
             }
-
-            GlobalData.combatOn = true;
-
-
 
             if (checkBoxRollNonPc.Checked)
             {
@@ -364,13 +385,15 @@ namespace InitiativeTracker
                 }
             }
 
+            initiativeButton.Text = "Resume combat";
+            GlobalData.combatOn = true;
+
             RedrawItemBox();
 
             HideAllOnMain();
 
             this.IsMdiContainer = true;
 
-            CombatForm combatForm = new CombatForm(ShowAllOnMain);
 
             //combatForm.TopLevel = false;
 
@@ -521,6 +544,12 @@ namespace InitiativeTracker
                     }
                 }
 
+                if (changed)
+                {
+                    sb.Remove(sb.Length - 2, 2);
+                    sb.Append(".");
+                }
+
                 if (!changed)
                     sb.Append("None");
 
@@ -544,6 +573,7 @@ namespace InitiativeTracker
             initiativeModifierUpDown.Hide();
             initiativeButton.Hide();
             EndCombatButton.Hide();
+            combatForm.Show();
         }
 
         public void ShowAllOnMain(bool doesntMatter)
@@ -559,6 +589,12 @@ namespace InitiativeTracker
             initiativeModifierUpDown.Show();
             initiativeButton.Show();
             EndCombatButton.Show();
+
+            if (GlobalData.combatOn)
+                EndCombatButton.Enabled = true;
+
+            else
+                EndCombatButton.Enabled = false;
 
             this.IsMdiContainer = false;
         }
@@ -621,7 +657,7 @@ namespace InitiativeTracker
                             sb.Append(status.Key + " = " + status.Value + ", ");
                         }
 
-                        sb.Remove(sb.Length - 2, 2);
+                        //sb.Remove(sb.Length - 2, 2);
 
                         writer.WriteString(sb.ToString());
 
@@ -683,8 +719,6 @@ namespace InitiativeTracker
         {
             SelectedListViewItemCollection characters = listView.SelectedItems;
 
-            String s = "";
-
             foreach (ListViewItem character in characters)
             {
                 int currentCharacter = FindCharacterByName(character.Text);
@@ -708,6 +742,11 @@ namespace InitiativeTracker
 
                 hpform.Show();
             }
+            
+        }
+
+        private void InitiativeForm_Load(object sender, EventArgs e)
+        {
             
         }
     }

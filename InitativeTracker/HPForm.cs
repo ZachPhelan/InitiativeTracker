@@ -24,21 +24,47 @@ namespace InitativeTracker
 
             maxHPUpDown.Value = character.maxHP;
 
-            
+            TempHPUpDown.Value = character.tempHP;
         }
 
-        private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void CurrentHPUpDown_ValueChanged(object sender, EventArgs e)
         {
-            character.currentHP = Int32.Parse(currentHPUpDown.Value.ToString());
+            int currentNum = Int32.Parse(currentHPUpDown.Value.ToString());
+            int maxNum = Int32.Parse(maxHPUpDown.Value.ToString());
+
+            if (currentNum > maxNum)
+            {
+                character.maxHP = currentNum;
+                maxHPUpDown.Value = currentNum;
+            }
+
+
+            character.currentHP = currentNum;
         }
 
         private void MaxHPUpDown_ValueChanged(object sender, EventArgs e)
         {
-            character.maxHP = Int32.Parse(maxHPUpDown.Value.ToString());
+            int currentNum = Int32.Parse(currentHPUpDown.Value.ToString());
+            int maxNum = Int32.Parse(maxHPUpDown.Value.ToString());
+
+            if (currentNum > maxNum)
+            {
+                character.currentHP = maxNum;
+                currentHPUpDown.Value = maxNum;
+            }
+
+
+            character.maxHP = maxNum;
         }
 
-        private void HPForm_Load(object sender, EventArgs e)
+        private void TempHPUpDown_ValueChanged(object sender, EventArgs e)
         {
+            int tempNum = Int32.Parse(TempHPUpDown.Value.ToString());
+
+            if (tempNum < 0)
+                tempNum = 0;
+
+            character.tempHP = tempNum;
 
         }
     }

@@ -30,37 +30,40 @@
         {
             this.currentHPUpDown = new System.Windows.Forms.NumericUpDown();
             this.maxHPUpDown = new System.Windows.Forms.NumericUpDown();
-            this.currentHPLabel = new System.Windows.Forms.Label();
             this.maxHPLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tempHPLabel = new System.Windows.Forms.Label();
+            this.TempHPUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.currentHPUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxHPUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TempHPUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // currentHPUpDown
             // 
             this.currentHPUpDown.Location = new System.Drawing.Point(131, 70);
+            this.currentHPUpDown.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.currentHPUpDown.Name = "currentHPUpDown";
             this.currentHPUpDown.Size = new System.Drawing.Size(120, 20);
             this.currentHPUpDown.TabIndex = 0;
-            this.currentHPUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown1_ValueChanged);
+            this.currentHPUpDown.ValueChanged += new System.EventHandler(this.CurrentHPUpDown_ValueChanged);
             // 
             // maxHPUpDown
             // 
             this.maxHPUpDown.Location = new System.Drawing.Point(131, 119);
+            this.maxHPUpDown.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.maxHPUpDown.Name = "maxHPUpDown";
             this.maxHPUpDown.Size = new System.Drawing.Size(120, 20);
             this.maxHPUpDown.TabIndex = 1;
             this.maxHPUpDown.ValueChanged += new System.EventHandler(this.MaxHPUpDown_ValueChanged);
-            // 
-            // currentHPLabel
-            // 
-            this.currentHPLabel.AutoSize = true;
-            this.currentHPLabel.Location = new System.Drawing.Point(32, 70);
-            this.currentHPLabel.Name = "currentHPLabel";
-            this.currentHPLabel.Size = new System.Drawing.Size(59, 13);
-            this.currentHPLabel.TabIndex = 2;
-            this.currentHPLabel.Text = "Current HP";
-            this.currentHPLabel.Visible = false;
             // 
             // maxHPLabel
             // 
@@ -71,20 +74,53 @@
             this.maxHPLabel.TabIndex = 3;
             this.maxHPLabel.Text = "Max HP";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(35, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Current HP";
+            // 
+            // tempHPLabel
+            // 
+            this.tempHPLabel.AutoSize = true;
+            this.tempHPLabel.Location = new System.Drawing.Point(35, 167);
+            this.tempHPLabel.Name = "tempHPLabel";
+            this.tempHPLabel.Size = new System.Drawing.Size(52, 13);
+            this.tempHPLabel.TabIndex = 6;
+            this.tempHPLabel.Text = "Temp HP";
+            // 
+            // TempHPUpDown
+            // 
+            this.TempHPUpDown.Location = new System.Drawing.Point(131, 161);
+            this.TempHPUpDown.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.TempHPUpDown.Name = "TempHPUpDown";
+            this.TempHPUpDown.Size = new System.Drawing.Size(120, 20);
+            this.TempHPUpDown.TabIndex = 5;
+            this.TempHPUpDown.ValueChanged += new System.EventHandler(this.TempHPUpDown_ValueChanged);
+            // 
             // HPForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tempHPLabel);
+            this.Controls.Add(this.TempHPUpDown);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.maxHPLabel);
-            this.Controls.Add(this.currentHPLabel);
             this.Controls.Add(this.maxHPUpDown);
             this.Controls.Add(this.currentHPUpDown);
             this.Name = "HPForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.HPForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.currentHPUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxHPUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TempHPUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,7 +130,9 @@
 
         private System.Windows.Forms.NumericUpDown currentHPUpDown;
         private System.Windows.Forms.NumericUpDown maxHPUpDown;
-        private System.Windows.Forms.Label currentHPLabel;
         private System.Windows.Forms.Label maxHPLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label tempHPLabel;
+        private System.Windows.Forms.NumericUpDown TempHPUpDown;
     }
 }
