@@ -1,4 +1,4 @@
-﻿namespace InitativeTracker
+﻿namespace InitiativeTracker
 {
     partial class CombatForm
     {
@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.currentCharacterLabel = new System.Windows.Forms.Label();
             this.endTurnButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.endCombatButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.statuses = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -48,6 +47,7 @@
             this.textNextCharacter = new System.Windows.Forms.Label();
             this.nextCharacterLabel = new System.Windows.Forms.Label();
             this.hurtButton = new System.Windows.Forms.Button();
+            this.updateStatusButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.changeHPUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,15 +80,6 @@
             this.endTurnButton.Text = "End Turn";
             this.endTurnButton.UseVisualStyleBackColor = true;
             this.endTurnButton.Click += new System.EventHandler(this.endTurnButton_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 161);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Status Effects:";
             // 
             // endCombatButton
             // 
@@ -258,6 +249,16 @@
             this.hurtButton.UseVisualStyleBackColor = false;
             this.hurtButton.Click += new System.EventHandler(this.hurtButton_Click);
             // 
+            // updateStatusButton
+            // 
+            this.updateStatusButton.Location = new System.Drawing.Point(217, 365);
+            this.updateStatusButton.Name = "updateStatusButton";
+            this.updateStatusButton.Size = new System.Drawing.Size(98, 46);
+            this.updateStatusButton.TabIndex = 20;
+            this.updateStatusButton.Text = "Update Status Effect";
+            this.updateStatusButton.UseVisualStyleBackColor = true;
+            this.updateStatusButton.Click += new System.EventHandler(this.UpdateStatusButton_Click);
+            // 
             // CombatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +266,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(780, 423);
             this.ControlBox = false;
+            this.Controls.Add(this.updateStatusButton);
             this.Controls.Add(this.hurtButton);
             this.Controls.Add(this.nextCharacterLabel);
             this.Controls.Add(this.textNextCharacter);
@@ -280,7 +282,6 @@
             this.Controls.Add(this.healthLabel);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.endCombatButton);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.endTurnButton);
             this.Controls.Add(this.currentCharacterLabel);
             this.Controls.Add(this.label1);
@@ -298,7 +299,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label currentCharacterLabel;
         private System.Windows.Forms.Button endTurnButton;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button endCombatButton;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader statuses;
@@ -315,5 +315,6 @@
         private System.Windows.Forms.Label textNextCharacter;
         private System.Windows.Forms.Label nextCharacterLabel;
         private System.Windows.Forms.Button hurtButton;
+        private System.Windows.Forms.Button updateStatusButton;
     }
 }

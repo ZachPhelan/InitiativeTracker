@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitativeTracker
+namespace InitiativeTracker
 {
     public class GlobalData
     {
@@ -19,5 +19,6 @@ namespace InitativeTracker
         public static bool combatOn;
 
         public static int roundNum;
+
     }
 }

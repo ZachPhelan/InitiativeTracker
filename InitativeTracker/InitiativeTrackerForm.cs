@@ -1,4 +1,4 @@
-﻿using InitativeTracker;
+﻿using InitiativeTracker;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,14 +20,14 @@ namespace InitiativeTracker
     public partial class initiativeForm : Form
     {
 
-        CombatForm combatForm;
+        //CombatForm combatForm;
 
         public initiativeForm()
         {
             InitializeComponent();
 
             GlobalData.characterList = new List<Character>();
-
+            GlobalData.roundNum = 1;
             
 
             GlobalData.characterList.Add(new Character(10, "Galadan", true));
@@ -37,10 +37,14 @@ namespace InitiativeTracker
 
             GlobalData.characterList.Add(new Character(20, "Onru", true));
 
-            combatForm = new CombatForm(ShowAllOnMain);
+            //CombatForm combatForm = new CombatForm(ShowAllOnMain);
+
+            //combatForm.Show();
             
             RedrawItemBox();
         }
+
+        
 
 
         private void EnterButton_Click(object sender, EventArgs e)
@@ -275,6 +279,7 @@ namespace InitiativeTracker
                 }
 
                 GlobalData.combatIndex = 0;
+                GlobalData.roundNum = 1;
                 GlobalData.combatOn = false;
 
                 RedrawItemBox();
@@ -287,7 +292,8 @@ namespace InitiativeTracker
         private void InitativeButton_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            
+
+            CombatForm combatForm;
 
             if (GlobalData.combatOn)
             {
@@ -296,6 +302,8 @@ namespace InitiativeTracker
                 this.IsMdiContainer = true;
 
                 //combatForm.TopLevel = false;
+
+                combatForm = new CombatForm(ShowAllOnMain);
 
                 combatForm.MdiParent = this;
 
@@ -396,6 +404,7 @@ namespace InitiativeTracker
 
 
             //combatForm.TopLevel = false;
+            combatForm = new CombatForm(ShowAllOnMain);
 
             combatForm.MdiParent = this;
 
@@ -430,6 +439,10 @@ namespace InitiativeTracker
         private int ParseNameForModifier(string characterName)
         {
             int num;
+
+            if (characterName.Length < 4)
+                return 0;
+
             if (Regex.IsMatch(characterName, "('+')[0-5]$"))
             {
                 num = Int32.Parse(characterName[characterName.Length - 1].ToString());
@@ -573,7 +586,6 @@ namespace InitiativeTracker
             initiativeModifierUpDown.Hide();
             initiativeButton.Hide();
             EndCombatButton.Hide();
-            combatForm.Show();
         }
 
         public void ShowAllOnMain(bool doesntMatter)
@@ -622,15 +634,18 @@ namespace InitiativeTracker
                 writer.WriteStartDocument();
                 writer.WriteStartElement("initiative-tracker");
 
+                writer.WriteStartElement("characters");
                 foreach (Character c in GlobalData.characterList)
                 {
                     writer.WriteStartElement("character");
-                    writer.WriteAttributeString("name", c.Name);
-                    writer.WriteAttributeString("initiative", c.Initiative.ToString());
-                    writer.WriteAttributeString("initiative-modifier", c.InitiativeModifier.ToString());
-                    writer.WriteAttributeString("player-character", c.IsPlayerCharacter.ToString());
-                    writer.WriteAttributeString("currentHP", c.currentHP.ToString());
-                    writer.WriteAttributeString("maxHP", c.maxHP.ToString());
+
+                    writer.WriteElementString("name", c.Name);
+                    writer.WriteElementString("initiative", c.Initiative.ToString());
+                    writer.WriteElementString("initiative-modifier", c.InitiativeModifier.ToString());
+                    writer.WriteElementString("player-character", c.IsPlayerCharacter.ToString());
+                    writer.WriteElementString("current-HP", c.currentHP.ToString());
+                    writer.WriteElementString("max-HP", c.maxHP.ToString());
+                    writer.WriteElementString("temp-HP", c.tempHP.ToString());
 
                     bool changed = false;
                     Dictionary<string, int> tempDict = new Dictionary<string, int>();
@@ -649,7 +664,7 @@ namespace InitiativeTracker
 
                     if (changed)
                     {
-                        writer.WriteStartElement("statuses");
+                        writer.WriteStartElement("statuse-effects");
                         StringBuilder sb = new StringBuilder();
 
                         foreach (KeyValuePair<string, int> status in tempDict)
@@ -659,13 +674,22 @@ namespace InitiativeTracker
 
                         //sb.Remove(sb.Length - 2, 2);
 
-                        writer.WriteString(sb.ToString());
+                        string stringBuilder = sb.ToString();
+
+                        if (stringBuilder.Length > 0)
+                            writer.WriteString(stringBuilder);
+
+                        else
+                            writer.WriteString("none");
+
 
                         writer.WriteEndElement();
 
                     }
                     writer.WriteEndElement();
                 }
+                writer.WriteEndElement();
+
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
 
@@ -682,38 +706,104 @@ namespace InitiativeTracker
             if (openFileDialog.FileName != "")
             {
 
-                XmlReader reader = XmlReader.Create(openFileDialog.FileName);
-                string characterName = "";
-                int initiative = 0;
-                int initiativeModifier = 0;
-                bool isPC = false;
-
-                while (reader.Read())
+                using (XmlReader reader = XmlReader.Create(openFileDialog.FileName))
                 {
-                    if (reader.IsStartElement())
+                    string name = "";
+                    int initiative = 0;
+                    int initiativeModifier = 0;
+                    bool PC = false;
+                    int currentHP = 0;
+                    int maxHP = 0;
+                    int tempHP = 0;
+                    Dictionary<string, int> statusEffects = new Dictionary<string, int>();
+
+                    bool firstCharacter = true;
+
+
+                    while (reader.Read())
                     {
 
-                        if (reader.Name == "character")
-
+                        if (reader.IsStartElement())
                         {
-                            characterName = reader["name"];
-                            initiative = Int32.Parse(reader["initiative"]);
-                            initiativeModifier = Int32.Parse(reader["initiative-modifier"]);
-                            if (reader["player-character"] == "True")
-                                isPC = true;
+                            switch (reader.Name)
+                            {
 
-                            else
-                                isPC = false;
+                                case "name":
+                                    reader.Read();
+                                    name = reader.Value;
+                                    break;
 
-                            AddCharacterToList(characterName, initiative, initiativeModifier, isPC);
+                                case "initiative":
+                                    reader.Read();
+                                    initiative = Int32.Parse(reader.Value);
+                                    break;
+
+                                case "initiative-modifier":
+                                    reader.Read();
+                                    initiativeModifier = Int32.Parse(reader.Value);
+                                    break;
+
+                                case "player-character":
+                                    reader.Read();
+                                    PC = bool.Parse(reader.Value);
+                                    break;
+
+                                case "current-HP":
+                                    reader.Read();
+                                    currentHP = Int32.Parse(reader.Value);
+                                    break;
+
+                                case "max-HP":
+                                    reader.Read();
+                                    maxHP = Int32.Parse(reader.Value);
+                                    break;
+
+                                case "temp-HP":
+                                    reader.Read();
+                                    tempHP = Int32.Parse(reader.Value);
+                                    break;
+
+
+                                case "status-effects":
+                                    reader.Read();
+                                    string s = reader.Value;
+
+                                    statusEffects = ParseStatusEffectForLoading(s);
+                                    break;
+
+                            }
                         }
-                            
+                        else
+                        {
+                            if (reader.Name == "character")
+                            {
+                                Character character = new Character(initiative, initiativeModifier, name, PC, currentHP, maxHP, tempHP, statusEffects);
+                                GlobalData.characterList.Add(character);
+
+                            }
+
+                        }
+
+
                     }
                 }
 
                 RedrawItemBox();
             }
         }
+
+        private Dictionary<string, int> ParseStatusEffectForLoading(string s)
+        {
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+
+
+            if (s == "empty")
+                return null;
+
+            return dict;
+        }
+
+
 
         private void StatusEffectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -734,14 +824,24 @@ namespace InitiativeTracker
 
             SelectedListViewItemCollection characters = listView.SelectedItems;
 
+            this.Enabled = false;
+
             foreach (ListViewItem character in characters)
             {
                 Character characterInList = GlobalData.characterList[FindCharacterByName(character.Text)];
 
-                HPForm hpform = new HPForm(characterInList);
+                //HPForm hpform = new HPForm(characterInList);
 
-                hpform.Show();
+                
+
+                using (HPForm hpForm = new HPForm(characterInList))
+                {
+                    hpForm.ShowDialog();
+                }
+                
             }
+
+            this.Enabled = true;
             
         }
 
@@ -749,5 +849,7 @@ namespace InitiativeTracker
         {
             
         }
+
+
     }
 }

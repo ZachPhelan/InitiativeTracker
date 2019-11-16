@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitativeTracker
+namespace InitiativeTracker
 {
     public class Character : IComparable
     {
@@ -52,6 +52,24 @@ namespace InitativeTracker
             currentHP = 0;
             maxHP = 0;
             tempHP = 0;
+        }
+
+        public Character(int _initative, int _modifier, string _name, bool isPC, int _currentHP, int _maxHP, int _tempHP, Dictionary<string, int> _status)
+        {
+            initative = _initative;
+            name = _name;
+            playerCharacter = isPC;
+            initiativeModifier = _modifier;
+
+            
+            statusEffects = _status;
+
+            if (_status == null)
+                initializeStatusEffects();
+
+            currentHP = _currentHP;
+            maxHP = _maxHP;
+            tempHP = _tempHP;
         }
 
         private void initializeStatusEffects()

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InitiativeTracker;
 
-namespace InitativeTracker
+namespace InitiativeTracker
 {
     public partial class CombatForm : Form
     {
@@ -41,7 +41,8 @@ namespace InitativeTracker
             VerticalScroll.Visible = false;
             HorizontalScroll.Enabled = false;
 
-            roundNum = 1;
+            roundNum = GlobalData.roundNum;
+
             roundNumberLabel.Text = roundNum.ToString();
 
             if (GlobalData.characterList.Count > 2)
@@ -64,6 +65,7 @@ namespace InitativeTracker
             {
                 GlobalData.combatIndex = 0;
 
+                GlobalData.roundNum++;
                 roundNum++;
                 roundNumberLabel.Text = roundNum.ToString();
             }
@@ -94,7 +96,7 @@ namespace InitativeTracker
             if (ShowAllMain != null)
                 ShowAllMain.Invoke(true);
 
-            this.Hide();
+            this.Close();
         }
 
         private void UpdateList(Character currentCharacter)
@@ -110,8 +112,6 @@ namespace InitativeTracker
                     listView1.Items.Add(status.Key);
                 }
             }
-
-            
 
         }
 
@@ -164,5 +164,25 @@ namespace InitativeTracker
 
             changeHPUpDown.Value = 0;
         }
+
+        private void UpdateStatusButton_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+
+            GlobalData.currentCharacterForStatusEffects = GlobalData.combatIndex;
+
+            Character currentCharacter = GlobalData.characterList[GlobalData.combatIndex];
+
+            using (StatusEffectForm form = new StatusEffectForm())
+            {
+                form.ShowDialog();
+
+                this.Enabled = true;
+
+                UpdateList(currentCharacter);
+            }
+
+        }
+
     }
 }

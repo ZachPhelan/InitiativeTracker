@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InitiativeTracker;
+using static InitiativeTracker.initiativeForm;
 
-namespace InitativeTracker
+namespace InitiativeTracker
 {
     public partial class StatusEffectForm : Form
     {
@@ -53,7 +55,7 @@ namespace InitativeTracker
                         break;
 
                     case "Frightened":
-                        deafenedCheckBox.Checked = true;
+                        frightenedCheckBox.Checked = true;
                         break;
 
                     case "Grappled":
@@ -472,14 +474,5 @@ namespace InitativeTracker
             currentCharacter.changeStatusEffect("Unconscious", newValue);
         }
 
-        private void StunnedLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UnconsciousLabel_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace InitativeTracker
+namespace InitiativeTracker
 {
     public partial class HPForm : Form
     {
@@ -19,6 +19,8 @@ namespace InitativeTracker
             InitializeComponent();
 
             character = _character;
+
+            this.Text = character.Name + "'s Health";
 
             currentHPUpDown.Value = character.currentHP;
 
@@ -66,6 +68,11 @@ namespace InitativeTracker
 
             character.tempHP = tempNum;
 
+        }
+
+        private void EscButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

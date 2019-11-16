@@ -1,4 +1,4 @@
-﻿namespace InitativeTracker
+﻿namespace InitiativeTracker
 {
     partial class UserControl1
     {

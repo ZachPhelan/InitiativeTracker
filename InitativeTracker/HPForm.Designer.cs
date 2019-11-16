@@ -1,4 +1,4 @@
-﻿namespace InitativeTracker
+﻿namespace InitiativeTracker
 {
     partial class HPForm
     {
@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tempHPLabel = new System.Windows.Forms.Label();
             this.TempHPUpDown = new System.Windows.Forms.NumericUpDown();
+            this.escButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.currentHPUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxHPUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TempHPUpDown)).BeginInit();
@@ -41,7 +42,7 @@
             // 
             // currentHPUpDown
             // 
-            this.currentHPUpDown.Location = new System.Drawing.Point(131, 70);
+            this.currentHPUpDown.Location = new System.Drawing.Point(108, 44);
             this.currentHPUpDown.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -54,7 +55,7 @@
             // 
             // maxHPUpDown
             // 
-            this.maxHPUpDown.Location = new System.Drawing.Point(131, 119);
+            this.maxHPUpDown.Location = new System.Drawing.Point(108, 93);
             this.maxHPUpDown.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -68,7 +69,7 @@
             // maxHPLabel
             // 
             this.maxHPLabel.AutoSize = true;
-            this.maxHPLabel.Location = new System.Drawing.Point(35, 125);
+            this.maxHPLabel.Location = new System.Drawing.Point(12, 99);
             this.maxHPLabel.Name = "maxHPLabel";
             this.maxHPLabel.Size = new System.Drawing.Size(45, 13);
             this.maxHPLabel.TabIndex = 3;
@@ -77,7 +78,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 72);
+            this.label1.Location = new System.Drawing.Point(12, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 4;
@@ -86,7 +87,7 @@
             // tempHPLabel
             // 
             this.tempHPLabel.AutoSize = true;
-            this.tempHPLabel.Location = new System.Drawing.Point(35, 167);
+            this.tempHPLabel.Location = new System.Drawing.Point(12, 141);
             this.tempHPLabel.Name = "tempHPLabel";
             this.tempHPLabel.Size = new System.Drawing.Size(52, 13);
             this.tempHPLabel.TabIndex = 6;
@@ -94,7 +95,7 @@
             // 
             // TempHPUpDown
             // 
-            this.TempHPUpDown.Location = new System.Drawing.Point(131, 161);
+            this.TempHPUpDown.Location = new System.Drawing.Point(108, 135);
             this.TempHPUpDown.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -105,11 +106,25 @@
             this.TempHPUpDown.TabIndex = 5;
             this.TempHPUpDown.ValueChanged += new System.EventHandler(this.TempHPUpDown_ValueChanged);
             // 
+            // escButton
+            // 
+            this.escButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.escButton.Location = new System.Drawing.Point(194, 179);
+            this.escButton.Name = "escButton";
+            this.escButton.Size = new System.Drawing.Size(75, 23);
+            this.escButton.TabIndex = 7;
+            this.escButton.Text = "escButton";
+            this.escButton.UseVisualStyleBackColor = true;
+            this.escButton.Visible = false;
+            this.escButton.Click += new System.EventHandler(this.EscButton_Click);
+            // 
             // HPForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.CancelButton = this.escButton;
+            this.ClientSize = new System.Drawing.Size(293, 217);
+            this.Controls.Add(this.escButton);
             this.Controls.Add(this.tempHPLabel);
             this.Controls.Add(this.TempHPUpDown);
             this.Controls.Add(this.label1);
@@ -134,5 +149,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label tempHPLabel;
         private System.Windows.Forms.NumericUpDown TempHPUpDown;
+        private System.Windows.Forms.Button escButton;
     }
 }

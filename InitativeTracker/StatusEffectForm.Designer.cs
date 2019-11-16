@@ -1,4 +1,4 @@
-﻿namespace InitativeTracker
+﻿namespace InitiativeTracker
 {
     partial class StatusEffectForm
     {
@@ -295,7 +295,6 @@
             this.stunnedLabel.TabIndex = 31;
             this.stunnedLabel.Text = "Stunned";
             this.statusToolTip.SetToolTip(this.stunnedLabel, resources.GetString("stunnedLabel.ToolTip"));
-            this.stunnedLabel.Click += new System.EventHandler(this.StunnedLabel_Click);
             // 
             // unconsciousLabel
             // 
@@ -307,7 +306,6 @@
             this.unconsciousLabel.TabIndex = 33;
             this.unconsciousLabel.Text = "Unconscious";
             this.statusToolTip.SetToolTip(this.unconsciousLabel, resources.GetString("unconsciousLabel.ToolTip"));
-            this.unconsciousLabel.Click += new System.EventHandler(this.UnconsciousLabel_Click);
             // 
             // frightenedLabel
             // 
